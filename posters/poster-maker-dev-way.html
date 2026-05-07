@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>poster-maker — the dev way</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Archivo+Black&family=DM+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* === LEFT HALF — paper / editorial / slow === */
+  .left {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 80% at 35% 45%, #fbf5e6 0%, #ece2c8 100%);
+  }
+
+  .left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='0.7'/></svg>");
+    mix-blend-mode: multiply;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  .left::after {
+    content: '';
+    position: absolute;
+    top: -180px;
+    left: 25%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(220, 180, 110, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .left-content {
+    position: absolute;
+    left: 100px;
+    top: 0;
+    bottom: 0;
+    width: 720px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .left-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 26px;
+    color: #8a7a55;
+    letter-spacing: 0.32em;
+    text-transform: lowercase;
+    margin-bottom: 64px;
+  }
+
+  .left-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 188px;
+    color: #1f1a10;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 92px;
+  }
+
+  .left-list {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 50px;
+    color: #6b5e44;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+
+  .left-foot {
+    position: absolute;
+    left: 100px;
+    bottom: 90px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 30px;
+    color: #8a7a55;
+    letter-spacing: 0.04em;
+    z-index: 2;
+  }
+
+  /* === RIGHT HALF — black / loud / dev === */
+  .right {
+    position: absolute;
+    inset: 0;
+    background: #161818;
+    clip-path: polygon(
+      950px 0%,
+      938px 5%, 968px 11%, 944px 17%, 974px 23%, 938px 29%,
+      962px 35%, 945px 41%, 970px 47%, 938px 53%, 962px 59%,
+      944px 65%, 970px 71%, 938px 77%, 962px 83%, 945px 89%,
+      970px 95%, 950px 100%,
+      100% 100%,
+      100% 0%
+    );
+  }
+
+  .right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='2'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='0.85'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .right::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    width: 950px;
+    height: 720px;
+    background: radial-gradient(ellipse, rgba(56, 117, 200, 0.22) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* Cream sliver — backside of torn paper */
+  .rip-edge {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #ece2c8 0%, #d8c89c 100%);
+    clip-path: polygon(
+      950px 0%,
+      938px 5%, 968px 11%, 944px 17%, 974px 23%, 938px 29%,
+      962px 35%, 945px 41%, 970px 47%, 938px 53%, 962px 59%,
+      944px 65%, 970px 71%, 938px 77%, 962px 83%, 945px 89%,
+      970px 95%, 950px 100%,
+      966px 100%,
+      988px 95%, 962px 89%, 980px 83%, 956px 77%, 986px 71%,
+      960px 65%, 978px 59%, 954px 53%, 986px 47%, 960px 41%,
+      980px 35%, 954px 29%, 990px 23%, 960px 17%, 984px 11%,
+      954px 5%, 966px 0%
+    );
+    z-index: 3;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.55));
+  }
+
+  .right-content {
+    position: absolute;
+    left: 1080px;
+    right: 100px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 4;
+  }
+
+  .right-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: #3875c8;
+    letter-spacing: 0.3em;
+    margin-bottom: 64px;
+  }
+
+  .right-cmd {
+    font-family: 'DM Mono', monospace;
+    font-size: 92px;
+    font-weight: 500;
+    color: #eae9e5;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    line-height: 1;
+  }
+
+  .right-cmd .prompt {
+    color: #3875c8;
+    margin-right: 28px;
+  }
+
+  .right-trace {
+    font-family: 'DM Mono', monospace;
+    font-size: 30px;
+    color: #5a7ba3;
+    letter-spacing: 0.04em;
+    margin-bottom: 56px;
+    opacity: 0.85;
+  }
+
+  .right-trace::before {
+    content: '↳ ';
+    color: #3a5683;
+  }
+
+  .right-headline {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 240px;
+    color: #eae9e5;
+    letter-spacing: -0.045em;
+    line-height: 0.86;
+    text-transform: uppercase;
+    text-shadow: 0 0 80px rgba(56, 117, 200, 0.4);
+  }
+
+  .right-headline .dot {
+    color: #3875c8;
+    text-shadow: 0 0 60px rgba(56, 117, 200, 0.95);
+  }
+
+  .right-foot {
+    position: absolute;
+    right: 100px;
+    bottom: 90px;
+    font-family: 'DM Mono', monospace;
+    font-size: 28px;
+    color: #3875c8;
+    letter-spacing: 0.04em;
+    z-index: 4;
+  }
+
+  .right-foot::before {
+    content: '→ ';
+    color: #5a7ba3;
+  }
+
+  /* Tiny corner mark */
+  .corner-mark {
+    position: absolute;
+    left: 100px;
+    top: 90px;
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: #8a7a55;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .corner-mark-right {
+    position: absolute;
+    right: 100px;
+    top: 90px;
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: #94a3b8;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    z-index: 4;
+  }
+
+  /* Fit-to-window preview */
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="left">
+    <div class="corner-mark">est. before · ai</div>
+    <div class="left-content">
+      <div class="left-label">/ the slow way /</div>
+      <div class="left-headline">open canva.</div>
+      <div class="left-list">drag, align, undo, repeat.</div>
+    </div>
+    <div class="left-foot">still a blank canvas.</div>
+  </div>
+
+  <div class="right"></div>
+  <div class="rip-edge"></div>
+
+  <div class="corner-mark-right">v1.0 · MIT · zero deps</div>
+  <div class="right-content">
+    <div class="right-label">// THE DEV WAY</div>
+    <div class="right-cmd"><span class="prompt">$</span>/new-poster</div>
+    <div class="right-trace">poster.html exported</div>
+    <div class="right-headline">DONE<span class="dot">.</span></div>
+  </div>
+  <div class="right-foot">github.com/dabodamjan/poster-maker</div>
+
+  <script>
+    (function() {
+      const w = 1920, h = 1080;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>
