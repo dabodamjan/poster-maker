@@ -92,6 +92,10 @@ All the design knowledge — font pairings, color palettes, layout rules, Instag
 
 ## Examples
 
+![Made with poster-maker](assets/poster-maker-dev-way.png)
+
+*Self-referential example. See [`posters/poster-maker-dev-way.html`](posters/poster-maker-dev-way.html) for the source.*
+
 ![ReleaseRocket logo](assets/releaserocket/releaserocket-logo.png) ![ReleaseRocket promo](assets/releaserocket/releaserocket-promo.png)
 
 *The [ReleaseRocket](https://www.releaserocket.io/) app icon (corner radius + glow added to an existing logo) and a promo poster.*
