@@ -2,94 +2,213 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Poster Maker — GitHub Social Preview</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<title>Poster Maker GitHub social preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     width: 1280px;
     height: 640px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #161818;
-    font-family: 'Inter', sans-serif;
-    color: #eae9e5;
+    background: #003C3D;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, sans-serif;
     overflow: hidden;
     position: relative;
-    letter-spacing: -0.02em;
+    display: flex;
+    align-items: stretch;
   }
 
-  /* Dot pattern background */
-  body::before {
-    content: '';
+  /* Cyan glow, top right. */
+  .glow {
+    position: absolute;
+    top: -220px;
+    right: -160px;
+    width: 720px;
+    height: 720px;
+    background: radial-gradient(circle, rgba(76, 227, 230, 0.16) 0%, rgba(76, 227, 230, 0) 66%);
+    pointer-events: none;
+  }
+
+  /* Dot texture, masked so it fades away from the top right. */
+  .dots {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle at center, rgba(56, 117, 200, 0.2) 1.2px, transparent 1.2px);
-    background-size: 20px 20px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, transparent 65%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, transparent 65%);
+    background-image: radial-gradient(circle at center, rgba(76, 227, 230, 0.12) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(ellipse 85% 105% at 90% 6%, #000 0%, transparent 78%);
+    mask-image: radial-gradient(ellipse 85% 105% at 90% 6%, #000 0%, transparent 78%);
     pointer-events: none;
   }
 
-  /* Subtle glow */
-  body::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(56, 117, 200, 0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  /* ---------- left ---------- */
 
-  .content {
+  .left {
+    position: relative;
+    z-index: 2;
+    width: 65%;
+    padding: 74px 24px 140px 74px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 20px;
-    position: relative;
-    z-index: 1;
   }
 
   .headline {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 56px;
+    font-family: 'Libre Baskerville', Georgia, serif;
     font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -1.5px;
-    color: #eae9e5;
-    text-align: center;
-  }
-
-  .headline .accent {
-    color: #3875c8;
+    font-size: 110px;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    color: #ffffff;
+    white-space: nowrap;
   }
 
   .tagline {
-    font-size: 22px;
+    margin-top: 26px;
+    font-size: 30px;
     font-weight: 400;
-    line-height: 1.5;
-    color: #94a3b8;
-    text-align: center;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #B8DEDE;
   }
 
-  .badge {
-    font-size: 14px;
-    font-weight: 600;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 4px;
+  .command {
+    margin-top: 34px;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #4CE3E6;
+    white-space: nowrap;
   }
+
+  .command .prompt { opacity: 0.55; }
+
+  .command .cursor {
+    display: inline-block;
+    width: 12px;
+    height: 24px;
+    margin-left: 8px;
+    vertical-align: -4px;
+    background: #4CE3E6;
+    opacity: 0.85;
+  }
+
+  /* Anchored to the sheet, so the copy above can sit optically centred. */
+  .badge {
+    position: absolute;
+    left: 74px;
+    bottom: 60px;
+    background: #ffffff;
+    color: #003C3D;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    padding: 13px 24px 14px;
+    border-radius: 999px;
+  }
+
+  /* ---------- right: fanned poster thumbnails ---------- */
+
+  .right {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding-right: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fan {
+    position: relative;
+    width: 344px;
+    height: 300px;
+  }
+
+  .thumb {
+    position: absolute;
+    top: 35px;
+    width: 150px;
+    height: 230px;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.42);
+  }
+
+  .thumb-dark {
+    left: 0;
+    transform: rotate(-8deg);
+    background: #0C2122;
+    border: 1px solid rgba(184, 222, 222, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 16px;
+  }
+
+  .thumb-dark .glyph {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 1;
+    color: #ECE2C8;
+  }
+
+  .thumb-paper {
+    left: 97px;
+    top: 21px;
+    z-index: 3;
+    transform: rotate(0deg);
+    background: #ECE2C8;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 9px;
+  }
+
+  .thumb-paper .ink {
+    height: 9px;
+    border-radius: 2px;
+    background: #1C1A16;
+  }
+
+  .thumb-paper .ink.tall { height: 30px; margin-bottom: 8px; }
+  .thumb-paper .ink.w90 { width: 90%; }
+  .thumb-paper .ink.w70 { width: 70%; }
+  .thumb-paper .ink.w45 { width: 45%; opacity: 0.45; }
+
+  /* Only the right band of this card clears the paper card, so its shapes
+     are right-anchored to stay readable in the fan. */
+  .thumb-ember {
+    left: 194px;
+    z-index: 2;
+    transform: rotate(8deg);
+    background: #E66233;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .thumb-ember .block {
+    background: #1C0D04;
+    border-radius: 3px;
+  }
+
+  .thumb-ember .block.bar { height: 11px; width: 58px; }
+  .thumb-ember .block.slab { height: 68px; width: 78px; }
+  .thumb-ember .block.dot { height: 24px; width: 24px; border-radius: 50%; }
 
   /* Fit-to-window preview */
   @media screen {
     html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
   }
 
   @media print {
@@ -98,15 +217,37 @@
 </style>
 </head>
 <body>
-  <div class="content">
-    <div class="badge">Open Source</div>
-    <div class="headline">Poster <span class="accent">Maker</span></div>
-    <div class="tagline">Describe what you want. Claude Code designs it in HTML/CSS.<br>Playwright renders it to PNG/PDF.</div>
+  <div class="glow"></div>
+  <div class="dots"></div>
+
+  <div class="left">
+    <h1 class="headline">Poster Maker</h1>
+    <p class="tagline">AI flyer and poster generator for Claude Code</p>
+    <div class="command"><span class="prompt">$</span> /new-poster launch flyer, dark, ember accent<span class="cursor"></span></div>
+    <div class="badge">dabo.dev</div>
+  </div>
+
+  <div class="right">
+    <div class="fan">
+      <div class="thumb thumb-dark"><span class="glyph">A</span></div>
+      <div class="thumb thumb-ember">
+        <div class="block bar"></div>
+        <div class="block slab"></div>
+        <div class="block dot"></div>
+      </div>
+      <div class="thumb thumb-paper">
+        <div class="ink tall w90"></div>
+        <div class="ink w90"></div>
+        <div class="ink w70"></div>
+        <div class="ink w45"></div>
+      </div>
+    </div>
   </div>
 
   <script>
     (function() {
-      const w = 1280, h = 640;
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
       function fit() {
         const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
         document.body.style.transform = 'scale(' + s + ')';

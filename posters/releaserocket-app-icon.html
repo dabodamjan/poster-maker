@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket app icon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* Transparent body: the exporter keys on this and writes a PNG with an
+     alpha channel, so everything outside the tile stays see-through. */
+  body {
+    width: 1024px;
+    height: 1024px;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile {
+    position: relative;
+    /* Edge to edge, like the shipped icon: the rounded mask is the SVG
+       rect's rx=84 on a 360 grid (~23%, the iOS convention). */
+    width: 1024px;
+    height: 1024px;
+  }
+
+  .tile svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Fit-to-window preview */
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="tile">
+    <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket app icon">
+      <defs>
+        <radialGradient id="tileBgIcon" cx="50%" cy="38%" r="78%">
+          <stop offset="0%" stop-color="#3A2A1F"/>
+          <stop offset="55%" stop-color="#1A1310"/>
+          <stop offset="100%" stop-color="#0B0908"/>
+        </radialGradient>
+        <linearGradient id="emberIcon" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F2854A"/>
+          <stop offset="100%" stop-color="#D9551F"/>
+        </linearGradient>
+      </defs>
+      <rect width="360" height="360" rx="84" fill="url(#tileBgIcon)"/>
+      <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#emberIcon)"/>
+      <polygon points="180,244 146,300 214,300" fill="url(#emberIcon)"/>
+    </svg>
+  </div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>
