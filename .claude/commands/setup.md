@@ -6,7 +6,7 @@ Onboard the user to Poster Maker. Run through the setup steps, verify everything
 
 ### Steps
 
-1. **Check Node.js** — run `node --version`. If not installed, tell the user to install it from https://nodejs.org/ and stop here.
+1. **Check Node.js** — run `node --version` and confirm it reports version 18 or newer. If not installed (or older than 18), tell the user to install it from https://nodejs.org/ and stop here.
 
 2. **Install dependencies** — run `npm install`. If it fails, diagnose and help the user fix it.
 

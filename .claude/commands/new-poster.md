@@ -23,6 +23,7 @@ The user will provide some or all of:
   - `github` — 1280×640 (2:1, GitHub social preview)
   - `a3` — 297×420mm print poster
   - `a4` — 210×297mm print poster
+  - any custom `WxH` in pixels (e.g., `1024x1024` app icon, `1200x630` OG image)
 
 ### Design Principles
 
@@ -140,7 +141,7 @@ Follow these rules to make posters that look professional, not like generic AI o
 
 ### Output
 
-1. **Ask the user upfront**: social media or print? This determines safe zones, text sizing, and whether to include the fit-to-window script.
+1. **Ask the user upfront**: social media or print? This determines safe zones and text sizing.
 2. Generate a single self-contained HTML file in `posters/` named with kebab-case (e.g., `posters/solar-frequencies-2026-03-15.html`, `posters/summer-sale-2026.html`)
 3. All CSS must be inline (in a `<style>` tag) — no external stylesheets except Google Fonts
 4. All assets (SVG patterns, noise textures) must be inline or CSS-generated — no external files except user-provided images

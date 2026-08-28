@@ -6,7 +6,7 @@ Usage:
   python scripts/remove-bg.py assets/photo.jpg
   python scripts/remove-bg.py assets/photo.jpg -o assets/photo-nobg.png
 
-Requires: pip install rembg[cli] Pillow
+Requires: pip install "rembg[cli]" Pillow
 """
 
 import argparse
@@ -34,7 +34,7 @@ def main():
         from PIL import Image
     except ImportError:
         print("rembg is not installed. Install it with:")
-        print("  pip install rembg[cli] Pillow")
+        print('  pip install "rembg[cli]" Pillow')
         sys.exit(1)
 
     print(f"Processing {input_path}...")
