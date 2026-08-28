@@ -48,7 +48,7 @@ Then run:
 /setup
 ```
 
-`/setup` checks Node.js, installs the npm dependencies, downloads the Playwright Chromium browser, then exports both included ReleaseRocket examples to `exports/` to verify everything works.
+`/setup` checks Node.js, installs the npm dependencies, downloads the Playwright Chromium browser, then exports two of the included ReleaseRocket examples to `exports/` to verify everything works.
 
 ## Make a poster or flyer
 
