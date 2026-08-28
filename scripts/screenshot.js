@@ -5,6 +5,7 @@
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
+const { parseDimensions } = require('./dimensions');
 
 async function screenshot(htmlPath, outputPath) {
   const absoluteHtml = path.resolve(htmlPath);
@@ -21,22 +22,10 @@ async function screenshot(htmlPath, outputPath) {
 
   fs.mkdirSync(path.dirname(absoluteOutput), { recursive: true });
 
-  // Read HTML to detect poster dimensions from body style
   const html = fs.readFileSync(absoluteHtml, 'utf-8');
-  let width = 1080;
-  let height = 1920;
-
-  // Match dimensions in the body { ... } block to avoid matching nested elements
-  const bodyBlock = html.match(/body\s*\{[^}]*\}/);
-  if (bodyBlock) {
-    const widthMatch = bodyBlock[0].match(/width\s*:\s*(\d+)px/);
-    const heightMatch = bodyBlock[0].match(/height\s*:\s*(\d+)px/);
-    if (widthMatch) width = parseInt(widthMatch[1]);
-    if (heightMatch) height = parseInt(heightMatch[1]);
-  }
-
-  // Detect transparent background on body
-  const hasTransparentBg = bodyBlock && /background\s*:\s*transparent/.test(bodyBlock[0]);
+  const dims = parseDimensions(html);
+  const width = dims.cssWidth;
+  const height = dims.cssHeight;
 
   const browser = await chromium.launch();
   const context = await browser.newContext({
@@ -56,7 +45,7 @@ async function screenshot(htmlPath, outputPath) {
   // Wait for fonts to load
   await page.evaluate(() => document.fonts.ready);
 
-  await page.screenshot({ path: absoluteOutput, fullPage: false, clip: { x: 0, y: 0, width, height }, omitBackground: hasTransparentBg });
+  await page.screenshot({ path: absoluteOutput, fullPage: false, clip: { x: 0, y: 0, width, height }, omitBackground: dims.transparent });
   await browser.close();
 
   console.log(`Screenshot saved: ${absoluteOutput} (${width}×${height})`);

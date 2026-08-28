@@ -21,9 +21,14 @@ The user will provide some or all of:
   - `square` — 1080×1080 (1:1)
   - `landscape` — 1920×1080 (16:9)
   - `github` — 1280×640 (2:1, GitHub social preview)
+  - `og` — 1200×630 (blog cover / social link preview)
+  - `youtube` — 1280×720 (YouTube thumbnail)
   - `a3` — 297×420mm print poster
   - `a4` — 210×297mm print poster
-  - any custom `WxH` in pixels (e.g., `1024x1024` app icon, `1200x630` OG image)
+  - `business-card` — 3.5×2in print card
+  - any custom `WxH` in pixels (e.g., `1024x1024` app icon)
+
+  For print formats (`a4`, `a3`, `business-card`), size the body in physical units (`width: 210mm`, `width: 3.5in`). The export and screenshot scripts convert physical units to CSS pixels at 96 per inch, render print PNGs at 4x device scale (roughly 384 DPI), and give PDFs the true physical page size. In the fit-to-window script, use the CSS pixel equivalents (210mm ≈ 794px).
 
 ### Design Principles
 

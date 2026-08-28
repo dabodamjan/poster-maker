@@ -103,7 +103,7 @@ Pass `/export-poster` the name of an HTML file in `posters/`:
 The command asks whether you want PNG or PDF:
 
 - PNG is the default. Playwright renders at 2x device scale, so a 1080x1920 poster produces a 2160x3840 PNG.
-- PDF is also available, with backgrounds included. Pages are sized in CSS pixels, not physical units.
+- PDF is also available, with backgrounds included. Posters sized in mm or inches get a true physical page size.
 
 Exports land in `exports/`. Run `/export-poster` without a filename and it lists the posters and lets you pick one.
 
@@ -115,11 +115,14 @@ Exports land in `exports/`. Run `/export-poster` without a filename and it lists
 | `square` | 1080x1080 px | Instagram post, 1:1 |
 | `landscape` | 1920x1080 px | YouTube-friendly 16:9 |
 | `github` | 1280x640 px | GitHub social preview, 2:1 |
-| `a4` | 210x297 mm | Prompt preset. The exporter needs px, see the print note |
-| `a3` | 297x420 mm | Prompt preset. The exporter needs px, see the print note |
-| Custom | any `WxH` in px | For example `1024x1024` or `1200x630` |
+| `og` | 1200x630 px | Blog cover and social link preview |
+| `youtube` | 1280x720 px | YouTube thumbnail |
+| `a4` | 210x297 mm | Print, see the print note |
+| `a3` | 297x420 mm | Print, see the print note |
+| `business-card` | 3.5x2 in | Print, see the print note |
+| Custom | any `WxH` in px | For example `1024x1024` |
 
-**Print note:** the export script reads only pixel dimensions (like `width: 1080px`) from the poster's body CSS. It does not parse mm or inches: a poster written as `210mm x 297mm` silently exports at the default 1080x1920 instead. For print work, size the body in pixels at your target proportions, for example 2480x3508 px for A4 at 300 DPI. The PNG export renders at 2x, so you get double that resolution, which is more than print needs.
+**Print note:** posters sized in physical units in the body CSS (`width: 210mm`, `width: 3.5in`) export as PDFs with the true physical page size and as PNGs at 4x device scale, which is roughly 384 DPI for A4. Pixel-sized posters export at 2x.
 
 ## How it works
 
@@ -136,7 +139,6 @@ All the design knowledge, including font pairings, color palettes, layout rules,
 - There is no GUI or drag-and-drop canvas. You edit through prompts or directly in HTML and CSS.
 - Claude Code requires a paid subscription or API budget.
 - Google Fonts load over the network when a poster renders. For offline use, provide local font files and the CSS yourself.
-- The exporter does not understand physical units (mm, inches, DPI) yet. Use the pixel sizing from the print note above.
 - The slash commands use the macOS `open` command to show previews. On Linux or Windows, replace that step with your platform's equivalent.
 - Output quality depends on the model, your prompt, your assets, and your review.
 
