@@ -21,6 +21,8 @@
 //                        lazy images, web fonts. Default: 4000
 //   --scale <n>          Device scale factor (retina). Default: 2
 //   --full-page          Capture the whole scrollable page, not just the viewport.
+//   --dark               Emulate prefers-color-scheme: dark, for sites whose
+//                        theme follows the system setting.
 //
 // Output: assets/<slug>/<page>-<viewport>.png  (one file per requested viewport)
 //
@@ -65,6 +67,7 @@ function parseArgs(argv) {
     wait: 4000,
     scale: 2,
     fullPage: false,
+    dark: false,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -73,6 +76,7 @@ function parseArgs(argv) {
     else if (a === "--wait") args.wait = Number(argv[++i]);
     else if (a === "--scale") args.scale = Number(argv[++i]);
     else if (a === "--full-page") args.fullPage = true;
+    else if (a === "--dark") args.dark = true;
     else if (a === "--viewport") {
       // name:WxH adds a one-off viewport (desktop-class by default).
       const spec = argv[++i] || "";
@@ -108,7 +112,7 @@ async function main() {
   if (!url || !slug) {
     console.error(
       "Usage: node scripts/screenshot-url.js <url> <slug> [--viewports desktop,mobile] " +
-        "[--viewport name:WxH] [--name page] [--wait ms] [--scale n] [--full-page]",
+        "[--viewport name:WxH] [--name page] [--wait ms] [--scale n] [--full-page] [--dark]",
     );
     process.exit(1);
   }
@@ -157,6 +161,7 @@ async function main() {
         deviceScaleFactor: args.scale,
         isMobile: !!vp.isMobile,
         hasTouch: !!vp.isMobile,
+        colorScheme: args.dark ? "dark" : "light",
       });
       const page = await context.newPage();
 

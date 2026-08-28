@@ -109,7 +109,7 @@ The command uses Python with `rembg` and Pillow. If `rembg` is missing, the comm
 node scripts/screenshot-url.js https://yoursite.com mysite
 ```
 
-This captures the page at real device viewports into `assets/mysite/`: desktop (1440x900) and mobile (390x844) by default, both at 2x, with presets for tablet and full HD and custom sizes via `--viewport name:WxH`. The browser launches with GPU rendering enabled, which lets WebGL and Three.js pages paint their canvas instead of the blank no-GPU fallback headless Chromium defaults to; a per-shot diagnostic reports whether a live WebGL context was found.
+This captures the page at real device viewports into `assets/mysite/`: desktop (1440x900) and mobile (390x844) by default, both at 2x, with presets for tablet and full HD, custom sizes via `--viewport name:WxH`, and `--dark` to capture a site's dark theme. The browser launches with GPU rendering enabled, which lets WebGL and Three.js pages paint their canvas instead of the blank no-GPU fallback headless Chromium defaults to; a per-shot diagnostic reports whether a live WebGL context was found.
 
 Drop the shots into the device-showcase example: copy [`posters/releaserocket-device-showcase.html`](posters/releaserocket-device-showcase.html), repoint its two image paths, change the address-bar text and wordmark, and export. The file's header comment walks through the whole swap.
 
