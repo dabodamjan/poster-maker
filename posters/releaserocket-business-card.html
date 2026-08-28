@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket Business Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* Physical units: 3.5in x 2in = 336 x 192 CSS px at 96 px/in. */
+  body {
+    width: 3.5in;
+    height: 2in;
+    overflow: hidden;
+    position: relative;
+    background: #161210;
+    color: #efe7d7;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Classic card frame: hairline rule inset 8px from the trim. */
+  .frame {
+    position: absolute;
+    inset: 8px;
+    border: 1px solid #352d22;
+    pointer-events: none;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Symmetric centred lockup: mark above the wordmark, URL anchored at the
+     bottom rule. Lifted slightly so the block centres against the URL band. */
+  .identity {
+    position: absolute;
+    inset: 18px;
+    padding-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+  }
+
+  /* viewBox cropped to the mark's ink bounds (66 54 228 246) so 44px of
+     element is 44px of mark rather than mostly padding. */
+  .mark {
+    height: 38px;
+    width: 35.2px;
+    display: block;
+    flex: 0 0 auto;
+    margin-bottom: 12px;
+  }
+
+  .name {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: #efe7d7;
+  }
+
+  .tagline {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    color: #a3967f;
+  }
+
+  .url {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 17px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    color: #e66233;
+    z-index: 1;
+  }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+
+  <div class="identity">
+    <svg class="mark" viewBox="66 54 228 246" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+      <defs>
+        <linearGradient id="cardEmber" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F2854A"/>
+          <stop offset="100%" stop-color="#D9551F"/>
+        </linearGradient>
+      </defs>
+      <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#cardEmber)"/>
+      <polygon points="180,244 146,300 214,300" fill="url(#cardEmber)"/>
+    </svg>
+
+    <div class="lockup">
+      <div class="name">ReleaseRocket</div>
+      <div class="tagline">Push code, publish everywhere.</div>
+    </div>
+  </div>
+
+  <div class="url">releaserocket.io</div>
+
+  <div class="grain"></div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>

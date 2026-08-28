@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket Instagram Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    background: #161210;
+    color: #efe7d7;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Dot texture, fading out from behind the headline */
+  .dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at center, rgba(230, 98, 51, 0.14) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 32% 30%, #000 5%, transparent 72%);
+    mask-image: radial-gradient(ellipse 70% 55% at 32% 30%, #000 5%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* The single soft ember glow, behind the headline */
+  .glow {
+    position: absolute;
+    left: 32%;
+    top: 30%;
+    width: 900px;
+    height: 900px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(230, 98, 51, 0.10) 0%, rgba(230, 98, 51, 0.04) 45%, transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain over everything */
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: #e66233;
+    text-transform: uppercase;
+  }
+
+  .headline {
+    margin-top: 46px;
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 118px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: #efe7d7;
+  }
+
+  .headline .dot { color: #e66233; }
+
+  /* The chips belong with the headline, so the larger void sits above the
+     quieter footer rather than splitting the message in half. */
+  .spacer { flex: 0.85; }
+  .spacer.below { flex: 1.15; }
+
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 108px;
+    padding: 0 32px;
+    background: #1d1813;
+    border: 1px solid #352d22;
+    border-radius: 12px;
+  }
+
+  .chip .tick {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    background: #e66233;
+  }
+
+  .chip .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: #efe7d7;
+    text-transform: uppercase;
+  }
+
+  .pricing {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: #a3967f;
+    text-transform: uppercase;
+  }
+
+  .pricing .accent { color: #e66233; }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  /* The drawn shapes fill 246 of the 360 viewBox rows, so a 64px box
+     renders a mark that reads at the intended ~44px of visible height. */
+  .footer svg {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin-left: -6px;
+  }
+
+  .footer .url {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #a3967f;
+  }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="dots"></div>
+  <div class="glow"></div>
+
+  <div class="content">
+    <div class="kicker">New in ReleaseRocket</div>
+
+    <h1 class="headline">One release.<br>Every channel<span class="dot">.</span></h1>
+
+    <div class="spacer"></div>
+
+    <div class="chips">
+      <div class="chip"><span class="tick"></span><span class="label">Changelog</span></div>
+      <div class="chip"><span class="tick"></span><span class="label">Social posts</span></div>
+      <div class="chip"><span class="tick"></span><span class="label">Blog draft</span></div>
+      <div class="chip"><span class="tick"></span><span class="label">Email</span></div>
+    </div>
+
+    <div class="spacer below"></div>
+
+    <div class="pricing"><span class="accent">$19/mo flat</span> &middot; 7-day free trial</div>
+
+    <div class="spacer below"></div>
+
+    <div class="footer">
+      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+        <defs>
+          <linearGradient id="emberPost" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F2854A"/>
+            <stop offset="100%" stop-color="#D9551F"/>
+          </linearGradient>
+        </defs>
+        <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#emberPost)"/>
+        <polygon points="180,244 146,300 214,300" fill="url(#emberPost)"/>
+      </svg>
+      <span class="url">releaserocket.io</span>
+    </div>
+  </div>
+
+  <div class="grain"></div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>

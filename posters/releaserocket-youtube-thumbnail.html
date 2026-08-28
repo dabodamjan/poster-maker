@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket YouTube Thumbnail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    position: relative;
+    background: #161210;
+    color: #efe7d7;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* The single ember glow, sitting behind the mark (the focal point). */
+  .glow {
+    position: absolute;
+    top: 50%;
+    left: 81%;
+    width: 780px;
+    height: 780px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(230, 98, 51, 0.10) 0%, rgba(230, 98, 51, 0.05) 42%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Grain: inline feTurbulence noise, kept low so it reads as paper, not static. */
+  .grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .stage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 64px 48px 64px 64px;
+  }
+
+  /* Sized so the longest headline line ("Every channel." at 140px Fraunces,
+     measured at 747px) clears the mark with room to breathe. */
+  .left {
+    flex: 0 0 auto;
+    width: 780px;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 10px 26px 12px;
+    border: 1px solid #352d22;
+    border-radius: 999px;
+    background: #1d1813;
+    color: #e66233;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 40px;
+    letter-spacing: 0.14em;
+    /* letter-spacing leaves dead space after the last glyph. Matching it with
+       text-indent adds the same space before the first, so the shrink-to-fit
+       pill ends up optically centred on its letters. */
+    text-indent: 0.14em;
+    line-height: 1;
+    margin-bottom: 54px;
+  }
+
+  .headline {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 620;
+    font-size: 140px;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  .headline span {
+    display: block;
+  }
+
+  .headline .accent {
+    color: #e66233;
+  }
+
+  .right {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile {
+    width: 336px;
+    height: 336px;
+    display: block;
+    transform: rotate(-6deg);
+  }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <div class="stage">
+    <div class="left">
+      <div class="pill">RELEASEROCKET</div>
+      <div class="headline">
+        <span>One push.</span>
+        <span class="accent">Every channel.</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <svg class="tile" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+        <defs>
+          <linearGradient id="ytEmber" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F2854A"/>
+            <stop offset="100%" stop-color="#D9551F"/>
+          </linearGradient>
+          <radialGradient id="ytTileBg" cx="50%" cy="38%" r="78%">
+            <stop offset="0%" stop-color="#3A2A1F"/>
+            <stop offset="55%" stop-color="#1A1310"/>
+            <stop offset="100%" stop-color="#0B0908"/>
+          </radialGradient>
+        </defs>
+        <rect width="360" height="360" rx="84" fill="url(#ytTileBg)"/>
+        <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#ytEmber)"/>
+        <polygon points="180,244 146,300 214,300" fill="url(#ytEmber)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="grain"></div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>

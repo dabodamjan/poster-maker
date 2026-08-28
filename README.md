@@ -12,9 +12,17 @@ Event flyers, Instagram Stories and posts, product launch posters, conference po
 
 *A self-referential example, made with Poster Maker. Source: [`posters/poster-maker-dev-way.html`](posters/poster-maker-dev-way.html)*
 
-<img src="assets/releaserocket/releaserocket-promo.png" width="236" alt="ReleaseRocket promotional poster in Instagram Story format with dark background and blue glow"> <img src="assets/releaserocket/releaserocket-logo.png" width="420" alt="ReleaseRocket app icon with rounded corners and glow on a transparent background">
+The rest of the gallery markets [ReleaseRocket](https://www.releaserocket.io/), my SaaS: real brand, real product copy, every design a single HTML file in this repo.
 
-*A promo poster (1080x1920 Instagram Story) and an app icon (1024x1024, transparent background) for [ReleaseRocket](https://www.releaserocket.io/), my SaaS. Sources: [`posters/releaserocket-promo.html`](posters/releaserocket-promo.html), [`posters/releaserocket-logo.html`](posters/releaserocket-logo.html)*
+| Example | Preview | Source |
+|---|---|---|
+| Event flyer, 1080x1920 Instagram Story | <img src="assets/examples/releaserocket-event-flyer.jpg" width="190" alt="Launch Night event flyer with large serif headline, ember rocket mark, and date, venue, and RSVP details on a warm dark background"> | [`releaserocket-event-flyer.html`](posters/releaserocket-event-flyer.html) |
+| Instagram post, 1080x1080 | <img src="assets/examples/releaserocket-instagram-post.jpg" width="240" alt="Feature announcement square reading One release. Every channel. with four channel chips and pricing"> | [`releaserocket-instagram-post.html`](posters/releaserocket-instagram-post.html) |
+| YouTube thumbnail, 1280x720 | <img src="assets/examples/releaserocket-youtube-thumbnail.jpg" width="320" alt="YouTube thumbnail reading One push. Every channel. next to the ReleaseRocket app icon"> | [`releaserocket-youtube-thumbnail.html`](posters/releaserocket-youtube-thumbnail.html) |
+| Blog cover / OG image, 1200x630 | <img src="assets/examples/releaserocket-blog-cover.jpg" width="320" alt="Blog cover reading Your changelog is a marketing channel with the ReleaseRocket mark and pricing footer"> | [`releaserocket-blog-cover.html`](posters/releaserocket-blog-cover.html) |
+| A4 print poster, 210x297 mm | <img src="assets/examples/releaserocket-a4-poster.jpg" width="190" alt="A4 print poster titled Push code, publish everywhere with four numbered steps explaining how ReleaseRocket works"> | [`releaserocket-a4-poster.html`](posters/releaserocket-a4-poster.html) |
+| Business card, 3.5x2 in | <img src="assets/examples/releaserocket-business-card.jpg" width="280" alt="Dark business card with centered ReleaseRocket mark, wordmark, tagline, and website address"> | [`releaserocket-business-card.html`](posters/releaserocket-business-card.html) |
+| App icon, 1024x1024 transparent | <img src="assets/examples/releaserocket-app-icon.png" width="190" alt="ReleaseRocket app icon, an ember orange rocket mark on a dark rounded tile with a transparent background around it"> | [`releaserocket-app-icon.html`](posters/releaserocket-app-icon.html) |
 
 ## Quickstart
 
@@ -97,12 +105,12 @@ The command uses Python with `rembg` and Pillow. If `rembg` is missing, the comm
 Pass `/export-poster` the name of an HTML file in `posters/`:
 
 ```text
-/export-poster releaserocket-promo.html
+/export-poster releaserocket-event-flyer.html
 ```
 
 The command asks whether you want PNG or PDF:
 
-- PNG is the default. Playwright renders pixel-sized posters at 2x device scale, so a 1080x1920 poster produces a 2160x3840 PNG. Physical-unit posters render at 4x, see the print note below.
+- PNG is the default. Playwright renders pixel-sized posters at 2x device scale, so a 1080x1920 flyer produces a 2160x3840 PNG. Physical-unit posters render at 4x, see the print note below.
 - PDF is also available, with backgrounds included. Posters sized in mm or inches get a true physical page size.
 
 Exports land in `exports/`. Run `/export-poster` without a filename and it lists the posters and lets you pick one.
