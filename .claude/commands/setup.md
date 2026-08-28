@@ -6,14 +6,14 @@ Onboard the user to Poster Maker. Run through the setup steps, verify everything
 
 ### Steps
 
-1. **Check Node.js** — run `node --version`. If not installed, tell the user to install it from https://nodejs.org/ and stop here.
+1. **Check Node.js** — run `node --version` and confirm it reports version 18 or newer. If not installed (or older than 18), tell the user to install it from https://nodejs.org/ and stop here.
 
 2. **Install dependencies** — run `npm install`. If it fails, diagnose and help the user fix it.
 
 3. **Install Playwright browser** — run `npx playwright install chromium`. This downloads the browser used for screenshots and exports.
 
 4. **Verify the setup** — export both included examples to confirm everything works:
-   - Run `node scripts/export.js posters/releaserocket-logo.html` — this is the [ReleaseRocket](https://www.releaserocket.io/) app icon (1024x1024), made entirely with Poster Maker. Output: `exports/releaserocket-logo.png`
+   - Run `node scripts/export.js posters/releaserocket-logo.html` — this is the [ReleaseRocket](https://www.releaserocket.io/) app icon (1024x1024): corner radius and glow applied in CSS to the raw logo in `assets/releaserocket/`. Output: `exports/releaserocket-logo.png`
    - Run `node scripts/export.js posters/releaserocket-promo.html` — a promotional poster for ReleaseRocket (1080x1920 Instagram Story format). Output: `exports/releaserocket-promo.png`
    - Read both exported PNGs from `exports/` to verify they look correct
    - Show the user the results

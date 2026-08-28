@@ -30,6 +30,6 @@ Then open the project in [Claude Code](https://claude.com/claude-code) and use `
 
 ## Code style
 
-- Poster HTML files should be self-contained (inline CSS, no external dependencies except Google Fonts)
+- Poster HTML files keep all CSS inline; the only external references are Google Fonts and images in `assets/`
 - Scripts use plain Node.js (no build step, no TypeScript)
 - Keep it simple

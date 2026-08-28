@@ -2,7 +2,7 @@
 
 ## Project Purpose
 
-A marketing poster generator powered by Claude Code. Creates visually striking, print-ready posters as self-contained HTML/CSS files, exportable to PNG/PDF. Works for any type of poster — event flyers, product launches, conference talks, DJ gigs, meetups, sale announcements, or anything else.
+A marketing poster generator powered by Claude Code. Creates visually striking posters as single HTML/CSS files, exportable to PNG/PDF. Works for any type of poster — event flyers, product launches, conference talks, DJ gigs, meetups, sale announcements, or anything else.
 
 ## Project Structure
 
@@ -29,7 +29,7 @@ scripts/
 
 ## Key Rules
 
-- Posters are **single self-contained HTML files** — all CSS inline, no external dependencies except Google Fonts and user-provided images.
+- Posters are **single HTML files with all CSS inline** — the only external references are Google Fonts and images from `assets/`.
 - Body dimensions are the poster size (default 1080x1920) with no scroll/margin.
 - Images go in `assets/`, organized in subfolders per project (e.g., `assets/deep-frequencies/`, `assets/nexus-launch/`). Referenced via relative paths from poster files (`../assets/project-name/photo.jpg`).
 - Always include `@media print` with `-webkit-print-color-adjust: exact`.
@@ -63,7 +63,7 @@ scripts/
 
 ## Tech Stack
 
-- **HTML + CSS** — poster content (no frameworks, no JS in poster itself)
+- **HTML + CSS** — poster content (no frameworks; the only JS in a poster is the fit-to-window preview script, which does not affect export)
 - **Google Fonts** — typography
 - **Playwright** — screenshot previews (`scripts/screenshot.js`) and PNG/PDF export
 - **Node.js** — tooling (playwright, serve)
