@@ -23,6 +23,7 @@ The rest of the gallery markets [ReleaseRocket](https://www.releaserocket.io/), 
 | A4 print poster, 210x297 mm | <img src="assets/examples/releaserocket-a4-poster.jpg" width="190" alt="A4 print poster titled Push code, publish everywhere with four numbered steps explaining how ReleaseRocket works"> | [`releaserocket-a4-poster.html`](posters/releaserocket-a4-poster.html) |
 | Business card, 3.5x2 in | <img src="assets/examples/releaserocket-business-card.jpg" width="280" alt="Dark business card with centered ReleaseRocket mark, wordmark, tagline, and website address"> | [`releaserocket-business-card.html`](posters/releaserocket-business-card.html) |
 | App icon, 1024x1024 transparent | <img src="assets/examples/releaserocket-app-icon.png" width="190" alt="ReleaseRocket app icon, an ember orange rocket mark on a dark rounded tile with a transparent background around it"> | [`releaserocket-app-icon.html`](posters/releaserocket-app-icon.html) |
+| Device showcase from a live site, 1920x1080 | <img src="assets/examples/releaserocket-device-showcase.jpg" width="320" alt="releaserocket.io shown inside a macOS browser window and a phone frame on a warm dark canvas"> | [`releaserocket-device-showcase.html`](posters/releaserocket-device-showcase.html) |
 
 ## Quickstart
 
@@ -101,6 +102,24 @@ Need to cut someone out of a photo?
 ```
 
 The command uses Python with `rembg` and Pillow. If `rembg` is missing, the command asks before installing the dependencies. The result is saved beside the original as `photo-nobg.png`.
+
+## Put a live website in a poster
+
+```bash
+node scripts/screenshot-url.js https://yoursite.com mysite
+```
+
+This captures the page at real device viewports into `assets/mysite/`: desktop (1440x900) and mobile (390x844) by default, both at 2x, with presets for tablet and full HD and custom sizes via `--viewport name:WxH`. The browser launches with the GPU forced on, so WebGL and Three.js pages render their canvas instead of a blank fallback.
+
+Drop the shots into the device-showcase example: copy [`posters/releaserocket-device-showcase.html`](posters/releaserocket-device-showcase.html), repoint its two image paths, change the address-bar text and wordmark, and export. The file's header comment walks through the whole swap.
+
+For a quick social-ready card from any screenshot, there is also:
+
+```bash
+node scripts/frame-screenshot.js --input shot.png --size 16:9
+```
+
+It centers the image on a 16:9, 4:5, or 1:1 canvas with a drop shadow, and samples the screenshot's own edge color for the background so the frame always matches.
 
 ## Export
 
