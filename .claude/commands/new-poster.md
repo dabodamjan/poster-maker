@@ -141,6 +141,7 @@ Follow these rules to make posters that look professional, not like generic AI o
     ```css
     @media screen {
       html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+      body { flex-shrink: 0; }
     }
     ```
     This does NOT affect export — Playwright renders at the exact poster dimensions.

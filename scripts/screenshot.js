@@ -37,13 +37,12 @@ async function screenshot(htmlPath, outputPath) {
   await page.goto(`file://${absoluteHtml}`, { waitUntil: 'networkidle' });
 
   // Disable the fit-to-window scaling for screenshot. The fit script sets
-  // transform, position, left, and top; all four must be reset or the
-  // capture is offset and cropped.
+  // inline transform, position, left, and top; remove all four (rather
+  // than override them) so stylesheet-authored values still apply.
   await page.evaluate(() => {
-    document.body.style.transform = 'none';
-    document.body.style.position = 'static';
-    document.body.style.left = '0';
-    document.body.style.top = '0';
+    for (const prop of ['transform', 'position', 'left', 'top']) {
+      document.body.style.removeProperty(prop);
+    }
     document.documentElement.style.background = 'transparent';
   });
 

@@ -102,7 +102,7 @@ Pass `/export-poster` the name of an HTML file in `posters/`:
 
 The command asks whether you want PNG or PDF:
 
-- PNG is the default. Playwright renders at 2x device scale, so a 1080x1920 poster produces a 2160x3840 PNG.
+- PNG is the default. Playwright renders pixel-sized posters at 2x device scale, so a 1080x1920 poster produces a 2160x3840 PNG. Physical-unit posters render at 4x, see the print note below.
 - PDF is also available, with backgrounds included. Posters sized in mm or inches get a true physical page size.
 
 Exports land in `exports/`. Run `/export-poster` without a filename and it lists the posters and lets you pick one.

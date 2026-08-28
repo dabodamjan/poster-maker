@@ -71,7 +71,7 @@ function parseDimensions(html) {
     result.physical = result.physical || height.physical;
   }
 
-  result.transparent = /background\s*:\s*transparent/.test(sized);
+  result.transparent = /background\s*:\s*transparent/i.test(sized);
   return result;
 }
 
