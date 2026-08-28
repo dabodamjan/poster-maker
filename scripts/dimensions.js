@@ -2,7 +2,7 @@
 //
 // Reads the poster's body { ... } CSS block and returns:
 //   cssWidth / cssHeight  - viewport size in CSS pixels
-//   physical              - true when the body is sized in mm or in
+//   physical              - true when the body is sized in physical units
 //   pdfWidth / pdfHeight  - values to pass to page.pdf() ("210mm" stays
 //                           physical so the PDF page has the true print size)
 //   transparent           - body declares `background: transparent`

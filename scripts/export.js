@@ -50,10 +50,10 @@ async function main() {
   await page.goto(`file://${absolutePath}`, { waitUntil: "networkidle" });
 
   // Disable the fit-to-window scaling for export. The fit script sets
-  // inline transform, position, left, and top; remove all four (rather
+  // inline transform, transform-origin, position, left, and top; remove them (rather
   // than override them) so stylesheet-authored values still apply.
   await page.evaluate(() => {
-    for (const prop of ["transform", "position", "left", "top"]) {
+    for (const prop of ["transform", "transform-origin", "position", "left", "top"]) {
       document.body.style.removeProperty(prop);
     }
     document.documentElement.style.background = "transparent";
