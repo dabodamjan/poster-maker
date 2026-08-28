@@ -72,6 +72,8 @@ More examples:
 
 The command first confirms whether the design is for social media or print. Claude then writes one HTML file to `posters/`, opens it in your browser, renders a preview with Playwright, and checks the screenshot. The default format is a 1080x1920 Instagram Story.
 
+Poster design leans on the model's taste. Run Claude Code with the most capable model available to you (Claude Fable 5 at the time of writing): layout and typography quality track the model tier directly.
+
 ## Iterate
 
 Ask for changes in plain language:
