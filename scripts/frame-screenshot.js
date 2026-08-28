@@ -22,8 +22,9 @@ function parseArgs(argv) {
     else if (a === "--output") args.output = argv[++i];
     else if (a === "--size") args.size = argv[++i];
     else if (a === "--bg") args.bg = argv[++i];
-    else if (a === "--padding-x") args.paddingX = parseInt(argv[++i], 10);
-    else if (a === "--padding-y") args.paddingY = parseInt(argv[++i], 10);
+    else if (a === "--padding-x") args.paddingX = Number(argv[++i]);
+    else if (a === "--padding-y") args.paddingY = Number(argv[++i]);
+    else if (a.startsWith("--")) throw new Error(`Unknown option: ${a}`);
   }
   return args;
 }
@@ -107,8 +108,8 @@ async function render(args) {
     bgColor = rgbToCss(sampledRgb);
   }
 
-  const paddingX = args.paddingX ?? dims.paddingX;
-  const paddingY = args.paddingY ?? dims.paddingY;
+  const paddingX = Number.isFinite(args.paddingX) ? args.paddingX : dims.paddingX;
+  const paddingY = Number.isFinite(args.paddingY) ? args.paddingY : dims.paddingY;
 
   const templatePath = path.resolve(__dirname, "screenshot-frame.html");
   const template = fs.readFileSync(templatePath, "utf-8");
@@ -128,7 +129,7 @@ async function render(args) {
       new Promise((resolve) => {
         const img = document.querySelector("img.screenshot");
         if (!img) return resolve();
-        if (img.complete && img.naturalWidth > 0) return resolve();
+        if (img.complete) return resolve();
         img.addEventListener("load", resolve, { once: true });
         img.addEventListener("error", resolve, { once: true });
       }),

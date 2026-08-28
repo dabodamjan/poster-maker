@@ -109,7 +109,7 @@ The command uses Python with `rembg` and Pillow. If `rembg` is missing, the comm
 node scripts/screenshot-url.js https://yoursite.com mysite
 ```
 
-This captures the page at real device viewports into `assets/mysite/`: desktop (1440x900) and mobile (390x844) by default, both at 2x, with presets for tablet and full HD and custom sizes via `--viewport name:WxH`. The browser launches with the GPU forced on, so WebGL and Three.js pages render their canvas instead of a blank fallback.
+This captures the page at real device viewports into `assets/mysite/`: desktop (1440x900) and mobile (390x844) by default, both at 2x, with presets for tablet and full HD and custom sizes via `--viewport name:WxH`. The browser launches with GPU rendering enabled, which lets WebGL and Three.js pages paint their canvas instead of the blank no-GPU fallback headless Chromium defaults to; a per-shot diagnostic reports whether a live WebGL context was found.
 
 Drop the shots into the device-showcase example: copy [`posters/releaserocket-device-showcase.html`](posters/releaserocket-device-showcase.html), repoint its two image paths, change the address-bar text and wordmark, and export. The file's header comment walks through the whole swap.
 
@@ -119,7 +119,7 @@ For a quick social-ready card from any screenshot, there is also:
 node scripts/frame-screenshot.js --input shot.png --size 16:9
 ```
 
-It centers the image on a 16:9, 4:5, or 1:1 canvas with a drop shadow, and samples the screenshot's own edge color for the background so the frame always matches.
+It centers the image on a 16:9, 4:5, or 1:1 canvas with a drop shadow, and samples the screenshot's edge color for the background. Pass `--bg <css-color>` to set the background yourself, which you will want for screenshots with transparency.
 
 ## Export
 

@@ -29,8 +29,8 @@
 // live site at real device viewports, the raw material for the browser-window
 // and phone frames of a device-showcase poster.
 //
-// GPU note: Chromium is launched with the GPU forced on so WebGL/Three.js
-// sites render their canvas instead of the no-GPU (blank) fallback. Headless
+// GPU note: Chromium is launched with GPU rendering enabled so WebGL/Three.js
+// sites can render their canvas instead of the no-GPU (blank) fallback. Headless
 // Chromium's default software GL reads as "no GPU" on WebGL2 sites and paints
 // blank. On macOS, WebGL is routed through Metal via ANGLE.
 
@@ -70,8 +70,8 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a === "--viewports") args.viewports = argv[++i];
     else if (a === "--name") args.name = argv[++i];
-    else if (a === "--wait") args.wait = parseInt(argv[++i], 10);
-    else if (a === "--scale") args.scale = parseInt(argv[++i], 10);
+    else if (a === "--wait") args.wait = Number(argv[++i]);
+    else if (a === "--scale") args.scale = Number(argv[++i]);
     else if (a === "--full-page") args.fullPage = true;
     else if (a === "--viewport") {
       // name:WxH adds a one-off viewport (desktop-class by default).
@@ -126,7 +126,8 @@ async function main() {
   const requested = (args.viewports || "desktop,mobile").split(",").map((s) => s.trim()).filter(Boolean);
   const viewports = {};
   for (const name of requested) {
-    const vp = PRESETS[name] || args.custom[name];
+    // Custom definitions win, so --viewport desktop:WxH overrides the preset.
+    const vp = args.custom[name] || PRESETS[name];
     if (!vp) {
       console.error(
         `Unknown viewport "${name}". Presets: ${Object.keys(PRESETS).join(", ")} (or define via --viewport ${name}:WxH)`,
