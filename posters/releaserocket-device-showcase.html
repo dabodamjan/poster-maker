@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ReleaseRocket device showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<!--
+  DEVICE SHOWCASE (1920x1080 landscape)
+  =====================================
+  Screenshot-forward poster for promoting a website: the SITE is the hero,
+  shown inside a macOS browser window (desktop capture) beside a phone frame
+  (mobile capture), with only a small corner wordmark.
+
+  THE SCREENSHOTS come from scripts/screenshot-url.js:
+      node scripts/screenshot-url.js https://yoursite.com <slug>
+      (add --dark to capture the site's dark theme, as this example does)
+      -> assets/<slug>/<page>-desktop.png  (1440x900 @2x)
+      -> assets/<slug>/<page>-mobile.png   (390x844  @2x)
+  where <page> is "home" for a root URL, else the URL's last path segment
+  (override with --name). Use the DEFAULT viewport capture, not --full-page:
+  the frames crop to the top of the page via object-fit: cover.
+
+  SWAP PROCEDURE for your own site:
+    1. THEME: edit the :root variables below (--accent + the two --canvas
+       stops are the big levers).
+    2. SCREENSHOTS: repoint the two img src paths (.window .shot = desktop,
+       .phone .pshot = mobile). A frame that renders as a flat panel means a
+       wrong src path; that is --frame-bg showing.
+    3. URL BAR: edit the text in .urlbar (the domain shown in the browser).
+    4. WORDMARK: replace the mark SVG, the name (.wm-name), and the url
+       (.wm-url) at the bottom-left.
+    5. RENDER + EXPORT:
+         node scripts/screenshot.js posters/your-copy.html
+         node scripts/export.js     posters/your-copy.html
+
+  This file ships wired to real captures of releaserocket.io in
+  assets/releaserocket-site/ so it renders as a worked example out of the box.
+-->
+<style>
+  /* THEME TOKENS (swap step 1) */
+  :root {
+    --canvas-top:    #1A1310;  /* gradient start (upper) */
+    --canvas-bottom: #0B0908;  /* gradient end (lower)   */
+    --accent:        #e66233;  /* glow + wordmark accent, the one brand knob */
+    --frame-bg:      #14100d;  /* fill behind a screenshot while it loads    */
+    --chrome-bg:     #211b15;  /* browser titlebar + phone body              */
+    --chrome-edge:   rgba(239, 231, 215, 0.10); /* frame hairline border     */
+    --url-fill:      #14100d;  /* browser url-bar pill fill                  */
+    --url-text:      #a3967f;  /* browser url-bar text                       */
+    --text:          #efe7d7;  /* wordmark name                              */
+    --muted:         #a3967f;  /* wordmark url                               */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  body {
+    position: relative;
+    background:
+      radial-gradient(1300px 820px at 62% 26%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 60%),
+      radial-gradient(900px 680px at 16% 82%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 62%),
+      linear-gradient(165deg, var(--canvas-top) 0%, var(--canvas-bottom) 100%);
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text);
+  }
+
+  /* Faint film grain so the flat gradient doesn't band on large exports. */
+  body::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 100; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* STAGE: phone + browser, vertically centered, side by side */
+  .stage {
+    position: absolute; inset: 0; z-index: 3;
+    display: flex; align-items: center; justify-content: center; gap: 72px;
+  }
+
+  /* PHONE FRAME (mobile capture) */
+  .phone {
+    position: relative; flex: none; width: 300px; padding: 14px;
+    border-radius: 44px; background: var(--chrome-bg);
+    border: 1px solid var(--chrome-edge);
+    box-shadow: 0 44px 100px rgba(0, 0, 0, 0.66),
+                0 0 70px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  /* Clean edge-to-edge screen, no notch: a notch just lands a black bar
+     across the site's own top nav, so the screenshot fills the bezel. */
+  .phone .pshot {
+    display: block; width: 100%; height: 600px; border-radius: 32px;
+    object-fit: cover; object-position: top center; background: var(--frame-bg);
+  }
+
+  /* BROWSER WINDOW (desktop capture) */
+  .window {
+    flex: none; width: 1180px; border-radius: 18px; overflow: hidden;
+    background: var(--frame-bg); border: 1px solid var(--chrome-edge);
+    box-shadow: 0 52px 130px rgba(0, 0, 0, 0.6),
+                0 0 100px color-mix(in srgb, var(--accent) 9%, transparent);
+  }
+  .titlebar {
+    height: 56px; display: flex; align-items: center; padding: 0 24px; gap: 11px;
+    background: var(--chrome-bg); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .dot { width: 15px; height: 15px; border-radius: 50%; }
+  /* macOS traffic lights: canonical colors, do not theme these. */
+  .dot.red    { background: #ff5f57; }
+  .dot.yellow { background: #febc2e; }
+  .dot.green  { background: #28c840; }
+  .urlbar {
+    margin-left: 22px; flex: 1; height: 34px; border-radius: 9px; background: var(--url-fill);
+    display: flex; align-items: center; padding: 0 20px; gap: 12px;
+    font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 20px; color: var(--url-text);
+  }
+  .urlbar .lock { width: 13px; height: 13px; border-radius: 3px; border: 2px solid var(--url-text); opacity: 0.75; }
+  .window .shot {
+    display: block; width: 100%; height: 720px;
+    object-fit: cover; object-position: top center; background: var(--frame-bg);
+  }
+
+  /* WORDMARK (corner, small) */
+  .wordmark { position: absolute; left: 72px; bottom: 60px; z-index: 6; display: inline-flex; align-items: center; gap: 16px; }
+  .wm-mark { width: 34px; height: 37px; display: block; }
+  .wm-name {
+    font-family: 'Fraunces', serif; font-optical-sizing: auto;
+    font-weight: 600; font-size: 30px; color: var(--text); letter-spacing: -0.02em;
+  }
+  .wm-sep { width: 2px; height: 27px; background: rgba(239, 231, 215, 0.18); margin: 0 7px; }
+  .wm-url { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 23px; color: var(--muted); letter-spacing: 0.04em; }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <!-- PHONE: mobile capture (swap step 2: .pshot src) -->
+    <div class="phone">
+      <img class="pshot" src="../assets/releaserocket-site/home-mobile.jpg" alt="releaserocket.io on a phone" />
+    </div>
+
+    <!-- BROWSER: desktop capture (swap step 2: .shot src) -->
+    <div class="window">
+      <div class="titlebar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <!-- swap step 3: the domain shown in the address bar -->
+        <span class="urlbar"><span class="lock"></span>releaserocket.io</span>
+      </div>
+      <img class="shot" src="../assets/releaserocket-site/home-desktop.jpg" alt="releaserocket.io on desktop" />
+    </div>
+  </div>
+
+  <!-- WORDMARK (swap step 4: mark SVG + name + url) -->
+  <div class="wordmark">
+    <svg class="wm-mark" viewBox="66 54 228 246" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+      <defs>
+        <linearGradient id="emberShowcase" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F2854A"/>
+          <stop offset="100%" stop-color="#D9551F"/>
+        </linearGradient>
+      </defs>
+      <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#emberShowcase)"/>
+      <polygon points="180,244 146,300 214,300" fill="url(#emberShowcase)"/>
+    </svg>
+    <span class="wm-name">ReleaseRocket</span>
+    <span class="wm-sep"></span>
+    <span class="wm-url">releaserocket.io</span>
+  </div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>

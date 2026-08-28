@@ -14,6 +14,8 @@ scripts/
   export.js        Playwright PNG/PDF export (auto-detects dimensions)
   screenshot.js    Playwright preview screenshots (auto-detects dimensions)
   dimensions.js    Shared body-CSS dimension parsing (px, mm, in)
+  screenshot-url.js  Capture a LIVE URL at device viewports into assets/<slug>/ (GPU forced on for WebGL sites)
+  frame-screenshot.js  Frame a screenshot on a social-ready canvas (screenshot-frame.html is its template)
   remove-bg.py     Background removal (requires rembg)
 .claude/commands/
   setup.md         /setup — install dependencies and verify setup
