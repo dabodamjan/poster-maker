@@ -122,7 +122,7 @@ Exports land in `exports/`. Run `/export-poster` without a filename and it lists
 | `business-card` | 3.5x2 in | Print, see the print note |
 | Custom | any `WxH` in px | For example `1024x1024` |
 
-**Print note:** posters sized in physical units in the body CSS (`width: 210mm`, `width: 3.5in`) export as PDFs with the true physical page size and as PNGs at 4x device scale, which is roughly 384 DPI for A4. Pixel-sized posters export at 2x.
+**Print note:** posters sized in physical units in the body CSS (`width: 210mm`, `width: 3.5in`, cm works too) export as PDFs with the true physical page size and as PNGs at 4x device scale, which is 384 DPI. Pixel-sized posters export at 2x.
 
 ## How it works
 
@@ -130,7 +130,7 @@ Each poster is a single HTML file in `posters/` with all CSS inline. No framewor
 
 The HTML body defines the poster dimensions. A small fit-to-window script scales the design to your browser window for previews without affecting the export.
 
-For exports, [Playwright](https://playwright.dev/) launches headless Chromium, reads the body dimensions from the HTML, waits for fonts to load, disables the preview scaling, and captures a PNG at 2x device scale or a PDF. A transparent PNG is produced when the body CSS declares `background: transparent`.
+For exports, [Playwright](https://playwright.dev/) launches headless Chromium, reads the body dimensions from the HTML, waits for fonts to load, disables the preview scaling, and captures a PNG (2x device scale, 4x for physical-unit posters) or a PDF. A transparent PNG is produced when the body CSS declares `background: transparent`.
 
 All the design knowledge, including font pairings, color palettes, layout rules, and Instagram safe zones, lives in [`.claude/commands/`](.claude/commands/) and `CLAUDE.md`. Tweak them to match your own style. That is the part no template editor gives you: the design system itself is plain text you can edit.
 

@@ -7,28 +7,34 @@
 //                           physical so the PDF page has the true print size)
 //   transparent           - body declares `background: transparent`
 //
-// Physical units convert at the CSS standard 96 px per inch (25.4 mm per inch).
+// Physical units (mm, cm, in) convert at the CSS standard 96 px per inch.
 // Posters with no parseable body dimensions fall back to 1080x1920.
 
 const CSS_PX_PER_IN = 96;
 const MM_PER_IN = 25.4;
+const CM_PER_IN = 2.54;
 
 function toCssPx(value, unit) {
   if (unit === "mm") return Math.round((value / MM_PER_IN) * CSS_PX_PER_IN);
+  if (unit === "cm") return Math.round((value / CM_PER_IN) * CSS_PX_PER_IN);
   if (unit === "in") return Math.round(value * CSS_PX_PER_IN);
   return Math.round(value);
 }
 
 function parseSide(block, side) {
-  const match = block.match(new RegExp(`${side}\\s*:\\s*([\\d.]+)(px|mm|in)`));
+  // (?<![-\w]) keeps min-width/max-width from matching as width,
+  // and line-height from matching as height.
+  const match = block.match(
+    new RegExp(`(?<![-\\w])${side}\\s*:\\s*(\\d*\\.?\\d+)(px|mm|cm|in)\\b`, "i")
+  );
   if (!match) return null;
   const value = parseFloat(match[1]);
   if (!Number.isFinite(value) || value <= 0) return null;
-  const unit = match[2];
+  const unit = match[2].toLowerCase();
   return {
     cssPx: toCssPx(value, unit),
     physical: unit !== "px",
-    declaration: `${match[1]}${unit}`,
+    declaration: `${value}${unit}`,
   };
 }
 
@@ -42,11 +48,17 @@ function parseDimensions(html) {
     transparent: false,
   };
 
-  const bodyBlock = html.match(/body\s*\{[^}]*\}/);
-  if (!bodyBlock) return result;
+  // (?<![.#\w-]) keeps class/id selectors like .body or #somebody from matching.
+  // Of all body blocks, use the first one that declares a dimension, so a
+  // plain reset like `html, body { margin: 0 }` does not shadow the sizing rule.
+  const bodyBlocks = html.match(/(?<![.#\w-])body\s*\{[^}]*\}/gi) || [];
+  const sized =
+    bodyBlocks.find((b) => parseSide(b, "width") || parseSide(b, "height")) ||
+    bodyBlocks[0];
+  if (!sized) return result;
 
-  const width = parseSide(bodyBlock[0], "width");
-  const height = parseSide(bodyBlock[0], "height");
+  const width = parseSide(sized, "width");
+  const height = parseSide(sized, "height");
 
   if (width) {
     result.cssWidth = width.cssPx;
@@ -59,7 +71,7 @@ function parseDimensions(html) {
     result.physical = result.physical || height.physical;
   }
 
-  result.transparent = /background\s*:\s*transparent/.test(bodyBlock[0]);
+  result.transparent = /background\s*:\s*transparent/.test(sized);
   return result;
 }
 

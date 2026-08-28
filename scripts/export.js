@@ -4,8 +4,8 @@
 // Exports to exports/ folder as PNG (default) or PDF.
 //
 // PNG resolution: 2x device scale for pixel-sized posters, 4x for posters
-// sized in mm or in (so an A4 poster exports at roughly 384 DPI).
-// PDF: posters sized in mm or in get a true physical page size.
+// sized in physical units (96 CSS px per inch x 4 = 384 DPI).
+// PDF: posters sized in physical units get a true physical page size.
 
 const { chromium } = require("playwright");
 const path = require("path");
@@ -49,9 +49,14 @@ async function main() {
 
   await page.goto(`file://${absolutePath}`, { waitUntil: "networkidle" });
 
-  // Disable the fit-to-window scaling for export
+  // Disable the fit-to-window scaling for export. The fit script sets
+  // transform, position, left, and top; all four must be reset or the
+  // capture is offset and cropped.
   await page.evaluate(() => {
     document.body.style.transform = "none";
+    document.body.style.position = "static";
+    document.body.style.left = "0";
+    document.body.style.top = "0";
     document.documentElement.style.background = "transparent";
   });
 

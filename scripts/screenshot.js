@@ -36,9 +36,14 @@ async function screenshot(htmlPath, outputPath) {
 
   await page.goto(`file://${absoluteHtml}`, { waitUntil: 'networkidle' });
 
-  // Disable the fit-to-window scaling for screenshot
+  // Disable the fit-to-window scaling for screenshot. The fit script sets
+  // transform, position, left, and top; all four must be reset or the
+  // capture is offset and cropped.
   await page.evaluate(() => {
     document.body.style.transform = 'none';
+    document.body.style.position = 'static';
+    document.body.style.left = '0';
+    document.body.style.top = '0';
     document.documentElement.style.background = 'transparent';
   });
 
@@ -48,7 +53,7 @@ async function screenshot(htmlPath, outputPath) {
   await page.screenshot({ path: absoluteOutput, fullPage: false, clip: { x: 0, y: 0, width, height }, omitBackground: dims.transparent });
   await browser.close();
 
-  console.log(`Screenshot saved: ${absoluteOutput} (${width}×${height})`);
+  console.log(`Screenshot saved: ${absoluteOutput} (${width * 2}×${height * 2} at 2x)`);
   return absoluteOutput;
 }
 
