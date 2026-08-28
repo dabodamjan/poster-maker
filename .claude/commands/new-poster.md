@@ -21,9 +21,14 @@ The user will provide some or all of:
   - `square` — 1080×1080 (1:1)
   - `landscape` — 1920×1080 (16:9)
   - `github` — 1280×640 (2:1, GitHub social preview)
+  - `og` — 1200×630 (blog cover / social link preview)
+  - `youtube` — 1280×720 (YouTube thumbnail)
   - `a3` — 297×420mm print poster
   - `a4` — 210×297mm print poster
-  - any custom `WxH` in pixels (e.g., `1024x1024` app icon, `1200x630` OG image)
+  - `business-card` — 3.5×2in print card
+  - any custom `WxH` in pixels (e.g., `1024x1024` app icon)
+
+  For print formats (`a4`, `a3`, `business-card`), size the body in physical units (`width: 210mm`, `width: 3.5in`; cm also works). Both scripts convert physical units to CSS pixels at 96 per inch. The export script renders print PNGs at 4x device scale (384 DPI) and gives PDFs the true physical page size; preview screenshots render at 2x.
 
 ### Design Principles
 
@@ -113,11 +118,12 @@ Follow these rules to make posters that look professional, not like generic AI o
     - Be careful with ambient background glows (`radial-gradient` on `.bg-glow`) near photo areas — they create ugly color hazes around faces. Keep glows away from where photos sit, or make them very subtle.
     - Use `filter: contrast(1.15) saturate(0.75) brightness(0.95)` to match photos to the poster mood — adjust per design
 
-12. **Fit-to-window preview script** — ALWAYS include at the end of `<body>` so the poster scales down to fit the browser window. **Use the poster's actual dimensions** (not hardcoded 1080/1920):
+12. **Fit-to-window preview script** — ALWAYS include at the end of `<body>` so the poster scales down to fit the browser window. It measures the body, so it works for any size and any unit:
     ```html
     <script>
       (function() {
-        const w = WIDTH, h = HEIGHT;
+        const rect = document.body.getBoundingClientRect();
+        const w = rect.width, h = rect.height;
         function fit() {
           const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
           document.body.style.transform = 'scale(' + s + ')';
@@ -135,6 +141,7 @@ Follow these rules to make posters that look professional, not like generic AI o
     ```css
     @media screen {
       html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+      body { flex-shrink: 0; }
     }
     ```
     This does NOT affect export — Playwright renders at the exact poster dimensions.
