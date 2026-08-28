@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 
 // Usage: node scripts/export.js posters/my-poster.html [--pdf]
-// Exports to exports/ folder as PNG (default, 2x resolution) or PDF
+// Exports to exports/ folder as PNG (default) or PDF.
+//
+// PNG resolution: 2x device scale for pixel-sized posters, 4x for posters
+// sized in physical units (96 CSS px per inch x 4 = 384 DPI).
+// PDF: posters sized in physical units get a true physical page size.
 
 const { chromium } = require("playwright");
 const path = require("path");
 const fs = require("fs");
+const { parseDimensions } = require("./dimensions");
 
 async function main() {
   const args = process.argv.slice(2);
@@ -23,22 +28,11 @@ async function main() {
     process.exit(1);
   }
 
-  // Read HTML to detect poster dimensions from body style
   const html = fs.readFileSync(absolutePath, "utf-8");
-  let width = 1080;
-  let height = 1920;
-
-  // Match dimensions in the body { ... } block to avoid matching nested elements
-  const bodyBlock = html.match(/body\s*\{[^}]*\}/);
-  if (bodyBlock) {
-    const widthMatch = bodyBlock[0].match(/width\s*:\s*(\d+)px/);
-    const heightMatch = bodyBlock[0].match(/height\s*:\s*(\d+)px/);
-    if (widthMatch) width = parseInt(widthMatch[1]);
-    if (heightMatch) height = parseInt(heightMatch[1]);
-  }
-
-  // Detect transparent background on body
-  const hasTransparentBg = bodyBlock && /background\s*:\s*transparent/.test(bodyBlock[0]);
+  const dims = parseDimensions(html);
+  const width = dims.cssWidth;
+  const height = dims.cssHeight;
+  const scale = dims.physical ? 4 : 2;
 
   const basename = path.basename(htmlFile, ".html");
   const ext = pdfMode ? "pdf" : "png";
@@ -49,15 +43,19 @@ async function main() {
   const browser = await chromium.launch();
   const context = await browser.newContext({
     viewport: { width, height },
-    deviceScaleFactor: 2,
+    deviceScaleFactor: scale,
   });
   const page = await context.newPage();
 
   await page.goto(`file://${absolutePath}`, { waitUntil: "networkidle" });
 
-  // Disable the fit-to-window scaling for export
+  // Disable the fit-to-window scaling for export. The fit script sets
+  // inline transform, transform-origin, position, left, and top; remove them (rather
+  // than override them) so stylesheet-authored values still apply.
   await page.evaluate(() => {
-    document.body.style.transform = "none";
+    for (const prop of ["transform", "transform-origin", "position", "left", "top"]) {
+      document.body.style.removeProperty(prop);
+    }
     document.documentElement.style.background = "transparent";
   });
 
@@ -67,21 +65,22 @@ async function main() {
   if (pdfMode) {
     await page.pdf({
       path: outputPath,
-      width: `${width}px`,
-      height: `${height}px`,
+      width: dims.pdfWidth,
+      height: dims.pdfHeight,
       printBackground: true,
     });
+    console.log(`Exported: ${outputPath} (${dims.pdfWidth} × ${dims.pdfHeight})`);
   } else {
     await page.screenshot({
       path: outputPath,
       fullPage: false,
       clip: { x: 0, y: 0, width, height },
-      omitBackground: hasTransparentBg,
+      omitBackground: dims.transparent,
     });
+    console.log(`Exported: ${outputPath} (${width * scale}×${height * scale} at ${scale}x)`);
   }
 
   await browser.close();
-  console.log(`Exported: ${outputPath} (${width}×${height})`);
 }
 
 main().catch((err) => {

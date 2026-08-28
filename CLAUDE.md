@@ -13,6 +13,7 @@ assets/            Images, logos, photos for use in posters
 scripts/
   export.js        Playwright PNG/PDF export (auto-detects dimensions)
   screenshot.js    Playwright preview screenshots (auto-detects dimensions)
+  dimensions.js    Shared body-CSS dimension parsing (px, mm, in)
   remove-bg.py     Background removal (requires rembg)
 .claude/commands/
   setup.md         /setup — install dependencies and verify setup
