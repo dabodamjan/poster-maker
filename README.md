@@ -8,9 +8,9 @@ Describe a flyer, poster, or social media graphic in [Claude Code](https://claud
 
 Event flyers, Instagram Stories and posts, product launch posters, conference posters, app icons, GitHub social previews, and print posters. Every design is code: the headline stays real text, and spacing, colors, and type sizes stay editable CSS.
 
-![Example poster comparing designing in a canvas editor with generating a poster from a Claude Code command](assets/poster-maker-dev-way.jpg)
+![Hero graphic reading Describe the poster. Get the file. with the generating command and the exported launch flyer beside it](assets/poster-maker-hero.jpg)
 
-*A self-referential example, made with Poster Maker. Source: [`posters/poster-maker-dev-way.html`](posters/poster-maker-dev-way.html)*
+*This image is itself a Poster Maker poster, showing the command and the flyer it produced. Source: [`posters/poster-maker-hero.html`](posters/poster-maker-hero.html)*
 
 The rest of the gallery markets [ReleaseRocket](https://www.releaserocket.io/), my SaaS: real brand, real product copy, every design a single HTML file in this repo.
 

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Poster Maker hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(1100px 800px at 78% 30%, rgba(76, 227, 230, 0.10), transparent 62%),
+      radial-gradient(900px 700px at 10% 90%, rgba(76, 227, 230, 0.05), transparent 60%),
+      linear-gradient(160deg, #004B4C 0%, #003C3D 45%, #002A2B 100%);
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+  }
+
+  /* Dot texture, fading toward the right where the card sits */
+  .dots {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(76, 227, 230, 0.13) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse 65% 70% at 30% 40%, black 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 65% 70% at 30% 40%, black 20%, transparent 75%);
+  }
+
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; z-index: 40; opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  .content {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex; align-items: center;
+    padding: 0 0 0 110px;
+  }
+
+  .left { width: 1050px; flex: none; }
+
+  .eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 26px; font-weight: 500; letter-spacing: 0.22em;
+    color: #4CE3E6; text-transform: uppercase;
+    margin-bottom: 38px;
+  }
+
+  .headline {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 84px; font-weight: 700; line-height: 1.2;
+    letter-spacing: -1px; color: #ffffff;
+    margin-bottom: 44px;
+  }
+  .headline .accent { color: #4CE3E6; }
+
+  .sub {
+    font-size: 30px; font-weight: 400; line-height: 1.55; color: #B8DEDE;
+    max-width: 820px; margin-bottom: 64px;
+  }
+
+  /* Terminal card with the command that makes the poster on the right */
+  .terminal {
+    width: 900px;
+    background: rgba(0, 26, 27, 0.65);
+    border: 1px solid rgba(76, 227, 230, 0.22);
+    border-radius: 14px;
+    padding: 30px 36px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 27px; line-height: 1.75;
+    box-shadow: 0 30px 70px rgba(0, 10, 10, 0.45);
+  }
+  .terminal .cmd { color: #ffffff; }
+  .terminal .cmd .dollar { color: #4CE3E6; }
+  .terminal .out { color: #7FB5B6; }
+  .terminal .out .arrow { color: #4CE3E6; }
+
+  .repo {
+    margin-top: 56px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 25px; font-weight: 500; letter-spacing: 0.04em;
+    color: #7FB5B6;
+  }
+
+  /* The actual flyer that command describes, as a tilted card */
+  .showcase {
+    position: absolute; right: 150px; top: 50%;
+    transform: translateY(-50%) rotate(4deg);
+    z-index: 6;
+  }
+  .showcase img {
+    display: block; width: 420px; border-radius: 18px;
+    border: 1px solid rgba(76, 227, 230, 0.25);
+    box-shadow: 0 50px 110px rgba(0, 8, 8, 0.6),
+                0 0 90px rgba(76, 227, 230, 0.12);
+  }
+  .showcase .tag {
+    position: absolute; left: 50%; bottom: -66px; transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: 'Geist Mono', monospace;
+    font-size: 22px; letter-spacing: 0.04em; color: #7FB5B6;
+  }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="dots"></div>
+
+  <div class="content">
+    <div class="left">
+      <div class="eyebrow">Poster Maker</div>
+      <h1 class="headline">Describe the poster.<br><span class="accent">Get the file.</span></h1>
+      <p class="sub">Claude Code writes each design as one HTML file you can read, edit, and keep in Git. A headless browser exports it to print-ready PNG or PDF.</p>
+      <div class="terminal">
+        <div class="cmd"><span class="dollar">$</span> /new-poster launch party flyer, ember on dark</div>
+        <div class="out"><span class="arrow">-&gt;</span> posters/releaserocket-event-flyer.html</div>
+        <div class="out"><span class="arrow">-&gt;</span> exports/releaserocket-event-flyer.png</div>
+      </div>
+      <div class="repo">github.com/dabodamjan/poster-maker</div>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <img src="../assets/examples/releaserocket-event-flyer.jpg" alt="The generated launch party flyer">
+    <div class="tag">the exported result</div>
+  </div>
+
+  <div class="grain"></div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>
