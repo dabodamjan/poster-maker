@@ -30,7 +30,7 @@ The rest of the gallery markets [ReleaseRocket](https://www.releaserocket.io/), 
 You need:
 
 - [Claude Code](https://claude.com/claude-code)
-- Git and [Node.js](https://nodejs.org/) 18 or newer
+- Git and [Node.js](https://nodejs.org/) 20 or newer
 - Python 3 with pip, only if you want to remove image backgrounds
 
 Everything works out of the box on macOS; for Linux and Windows see the FAQ below.
@@ -108,6 +108,8 @@ The command uses Python with `rembg` and Pillow. If `rembg` is missing, the comm
 ```bash
 node scripts/screenshot-url.js https://yoursite.com mysite
 ```
+
+This needs [Google Chrome](https://www.google.com/chrome/) installed: live pages load in your system Chrome with its sandbox on, not the bundled Chromium.
 
 This captures the page at real device viewports into `assets/mysite/`: desktop (1440x900) and mobile (390x844) by default, both at 2x, with presets for tablet and full HD, custom sizes via `--viewport name:WxH`, and `--dark` to capture a site's dark theme. The browser launches with GPU rendering enabled, which lets WebGL and Three.js pages paint their canvas instead of the blank no-GPU fallback headless Chromium defaults to; a per-shot diagnostic reports whether a live WebGL context was found.
 

@@ -6,6 +6,8 @@
 // Usage:
 //   node scripts/screenshot-url.js <url> <slug> [options]
 //
+//   Requires Google Chrome installed (runs the system Chrome, sandboxed).
+//
 //   <url>   Live page to capture, INCLUDING scheme (e.g. https://example.com)
 //   <slug>  Output folder under assets/ (e.g. mysite  ->  assets/mysite/)
 //
@@ -151,7 +153,14 @@ async function main() {
   const outDir = path.resolve(__dirname, "..", "assets", slug);
   fs.mkdirSync(outDir, { recursive: true });
 
-  const browser = await chromium.launch({ headless: true, args: GPU_ARGS });
+  // System Chrome with the sandbox on: this is the only script that loads
+  // content from outside the repo, so it gets an up-to-date, sandboxed browser.
+  const browser = await chromium.launch({
+    channel: "chrome",
+    chromiumSandbox: true,
+    headless: true,
+    args: GPU_ARGS,
+  });
   const saved = [];
 
   try {
