@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket Mug Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  MUG GALLERY PREVIEW (1600x1000)
+  ===============================
+  The wrap from posters/releaserocket-mug-wrap.html on two 11 oz mugs
+  drawn in CSS, one per side. Gallery image only; the print file is the
+  wrap poster. Scale: a 3.35 in (85 mm) wide, 98 mm tall mug at 4.7 px per
+  mm. The flat wrap is shown without cylinder distortion, cropped to the
+  face, with shading on top, so treat it as an approximation of the print.
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1600px;
+    height: 1000px;
+    overflow: hidden;
+    position: relative;
+    background: #f7f1e1;
+    color: #082a45;
+  }
+
+  .stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 190px;
+    padding-bottom: 60px;
+  }
+
+  .mug { position: relative; width: 400px; height: 461px; }
+
+  /* Floor shadow */
+  .mug::after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    right: -20px;
+    bottom: -26px;
+    height: 46px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(8, 42, 69, 0.28), rgba(8, 42, 69, 0) 70%);
+    z-index: 0;
+  }
+
+  /* Handle: a white ring on the side, behind the body. */
+  .handle {
+    position: absolute;
+    top: 92px;
+    width: 150px;
+    height: 230px;
+    border: 34px solid #ffffff;
+    border-radius: 46% 54% 54% 46% / 50%;
+    box-shadow: inset 0 0 0 1px rgba(8, 42, 69, 0.06), 0 10px 20px -10px rgba(8, 42, 69, 0.3);
+    z-index: 1;
+  }
+  .mug.handle-right .handle { right: -100px; }
+  .mug.handle-left .handle { left: -100px; }
+
+  .body {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 12px 12px 44px 44px / 12px 12px 26px 26px;
+    background: #ffffff;
+  }
+
+  /* The flat wrap at its print size (200 x 96 mm = 756 x 363 CSS px),
+     scaled to 4.7 px per mm and shifted so one half faces the viewer. */
+  .wrap {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 756px;
+    height: 363px;
+    transform-origin: top left;
+    display: flex;
+    background: #061f35;
+    color: #f5f0e4;
+  }
+  .handle-left .wrap { transform: translateX(-35px) scale(1.243); }
+  .handle-right .wrap { transform: translateX(-505px) scale(1.243); }
+
+  .half { width: 100mm; height: 96mm; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .flight { width: 72mm; height: 43mm; display: block; }
+  .lockup { display: flex; flex-direction: column; align-items: center; }
+  .lockup svg { width: 19mm; height: 18mm; display: block; }
+  .wordmark { margin-top: 5mm; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 12mm; letter-spacing: -0.01em; line-height: 1; }
+  .wordmark em { font-style: italic; color: #e6c15c; }
+  .url { margin-top: 5mm; font-family: 'DM Mono', monospace; font-weight: 500; font-size: 3.6mm; letter-spacing: 0.16em; color: #e6c15c; }
+
+  /* Cylinder shading over the print. */
+  .shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0) 22%, rgba(255, 255, 255, 0.10) 38%, rgba(255, 255, 255, 0) 52%, rgba(0, 0, 0, 0) 76%, rgba(0, 0, 0, 0.45) 100%);
+  }
+
+  /* Rim: the open top, seen slightly from above. */
+  .rim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -22px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: inset 0 -10px 16px -8px rgba(8, 42, 69, 0.25);
+    z-index: 3;
+  }
+  .rim::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    top: 7px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #d9d6cc, #f2efe8);
+  }
+
+  .caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 62px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    letter-spacing: 0.14em;
+    color: #4e6273;
+    text-transform: uppercase;
+  }
+  .caption b { font-weight: 500; color: #88620c; }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <path id="markBody" d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+      <path id="markShaft" d="M144.5 205.1 C143.2 205.8 88.4 261.5 86.8 263.7 C85.7 265.2 86.8 265 88.5 263.6 C93.6 259.1 108.3 245.9 118.8 236.4 C146.4 211.6 149 209.2 149.1 208.3 C149.3 207.2 148.6 205.5 147.7 205 C146.8 204.5 145.6 204.5 144.5 205.1 Z"/>
+    </defs>
+  </svg>
+
+  <div class="stage">
+    <div class="mug handle-left">
+      <div class="handle"></div>
+      <div class="body">
+        <div class="wrap">
+          <div class="half">
+            <svg class="flight" viewBox="-380 70 670 400" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-370 455 C-170 452 -40 380 28 318.8 C70 282 110 240 144 208.7" fill="none" stroke="#e6c15c" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 15"/>
+              <g fill="#e6c15c"><use href="#markBody"/><use href="#markShaft"/></g>
+            </svg>
+          </div>
+          <div class="half"></div>
+        </div>
+        <div class="shade"></div>
+      </div>
+      <div class="rim"></div>
+    </div>
+
+    <div class="mug handle-right">
+      <div class="handle"></div>
+      <div class="body">
+        <div class="wrap">
+          <div class="half"></div>
+          <div class="half">
+            <div class="lockup">
+              <svg viewBox="84 88 187 180" fill="#e6c15c" xmlns="http://www.w3.org/2000/svg"><use href="#markBody"/><use href="#markShaft"/></svg>
+              <div class="wordmark">Release<em>Rocket</em></div>
+              <div class="url">RELEASEROCKET.IO</div>
+            </div>
+          </div>
+        </div>
+        <div class="shade"></div>
+      </div>
+      <div class="rim"></div>
+    </div>
+  </div>
+
+  <div class="caption">11 oz mug &middot; <b>200 x 96 mm sublimation wrap</b></div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>

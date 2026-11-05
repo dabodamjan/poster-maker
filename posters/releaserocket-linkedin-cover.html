@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket LinkedIn Cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  LINKEDIN COMPANY PAGE COVER (1512x256)
+  ======================================
+  1512 x 256 px is the size LinkedIn's Page image help article gives as
+  both the minimum and the recommended cover size (PNG or JPEG, 3 MB max).
+  export.js renders at 2x, so resize the 3024 x 512 PNG down if the upload
+  goes over 3 MB.
+
+  The Page logo overlaps the cover's lower left on desktop, so the left
+  third only carries the decorative trajectory; all text sits right of
+  x = 440.
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1512px;
+    height: 256px;
+    overflow: hidden;
+    position: relative;
+    background: #061f35;
+    color: #f5f0e4;
+    font-variant-numeric: lining-nums;
+  }
+
+  .flight { position: absolute; left: 0; top: 0; width: 520px; height: 256px; display: block; }
+
+  .copy {
+    position: absolute;
+    left: 470px;
+    right: 72px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 66px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .headline em { font-style: italic; color: #e6c15c; }
+
+  .channels {
+    margin-top: 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 19px;
+    letter-spacing: 0.14em;
+    color: #b8b4a6;
+    text-transform: uppercase;
+  }
+  .channels b { font-weight: 500; color: #e6c15c; }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <!-- Mark paths: assets/releaserocket-brand/releaserocket-mark.svg (locked geometry) -->
+  <svg class="flight" viewBox="-560 40 1040 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+    <defs>
+      <linearGradient id="trailLi" gradientUnits="userSpaceOnUse" x1="-560" y1="500" x2="144" y2="209">
+        <stop offset="0" stop-color="#e6c15c" stop-opacity="0"/>
+        <stop offset="1" stop-color="#e6c15c" stop-opacity="0.85"/>
+      </linearGradient>
+    </defs>
+    <path d="M-560 520 C-300 500 -80 400 28 318.8 C70 282 110 240 144 208.7" fill="none" stroke="url(#trailLi)" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 16"/>
+    <g fill="#e6c15c">
+      <path d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+      <path d="M144.5 205.1 C143.2 205.8 88.4 261.5 86.8 263.7 C85.7 265.2 86.8 265 88.5 263.6 C93.6 259.1 108.3 245.9 118.8 236.4 C146.4 211.6 149 209.2 149.1 208.3 C149.3 207.2 148.6 205.5 147.7 205 C146.8 204.5 145.6 204.5 144.5 205.1 Z"/>
+    </g>
+  </svg>
+
+  <div class="copy">
+    <div class="headline">Reach more people with <em>every</em> release.</div>
+    <div class="channels">Changelog &middot; Social posts &middot; Email &middot; <b>releaserocket.io</b></div>
+  </div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>
