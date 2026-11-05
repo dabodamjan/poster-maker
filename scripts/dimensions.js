@@ -7,12 +7,20 @@
 //                           physical so the PDF page has the true print size)
 //   transparent           - body declares `background: transparent`
 //
+// renderScale() picks the device scale for a capture, capped so very large
+// print formats stay renderable.
+//
 // Physical units (mm, cm, in) convert at the CSS standard 96 px per inch.
 // Posters with no parseable body dimensions fall back to 1080x1920.
 
 const CSS_PX_PER_IN = 96;
 const MM_PER_IN = 25.4;
 const CM_PER_IN = 2.54;
+
+// Upper bound on rendered pixels per capture. Large print formats (an
+// 850x2000 mm roll-up banner is 3213x7559 CSS px) would otherwise ask
+// Chromium for a screenshot of several hundred megapixels and fail.
+const MAX_RENDER_PIXELS = 64e6;
 
 function toCssPx(value, unit) {
   if (unit === "mm") return Math.round((value / MM_PER_IN) * CSS_PX_PER_IN);
@@ -75,4 +83,11 @@ function parseDimensions(html) {
   return result;
 }
 
-module.exports = { parseDimensions };
+// The device scale to render at: the preferred scale, lowered (to two
+// decimals) when the capture would exceed MAX_RENDER_PIXELS.
+function renderScale(dims, preferred) {
+  const cap = Math.sqrt(MAX_RENDER_PIXELS / (dims.cssWidth * dims.cssHeight));
+  return Math.min(preferred, Math.floor(cap * 100) / 100);
+}
+
+module.exports = { parseDimensions, renderScale, CSS_PX_PER_IN };

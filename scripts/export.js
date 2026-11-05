@@ -4,13 +4,15 @@
 // Exports to exports/ folder as PNG (default) or PDF.
 //
 // PNG resolution: 2x device scale for pixel-sized posters, 4x for posters
-// sized in physical units (96 CSS px per inch x 4 = 384 DPI).
+// sized in physical units (96 CSS px per inch x 4 = 384 DPI). Very large
+// formats (roll-up banners) render at a lower scale so the PNG stays under
+// 64 megapixels; the log line reports the resulting DPI.
 // PDF: posters sized in physical units get a true physical page size.
 
 const { chromium } = require("playwright");
 const path = require("path");
 const fs = require("fs");
-const { parseDimensions } = require("./dimensions");
+const { parseDimensions, renderScale, CSS_PX_PER_IN } = require("./dimensions");
 
 async function main() {
   const args = process.argv.slice(2);
@@ -32,7 +34,7 @@ async function main() {
   const dims = parseDimensions(html);
   const width = dims.cssWidth;
   const height = dims.cssHeight;
-  const scale = dims.physical ? 4 : 2;
+  const scale = renderScale(dims, dims.physical ? 4 : 2);
 
   const basename = path.basename(htmlFile, ".html");
   const ext = pdfMode ? "pdf" : "png";
@@ -77,7 +79,8 @@ async function main() {
       clip: { x: 0, y: 0, width, height },
       omitBackground: dims.transparent,
     });
-    console.log(`Exported: ${outputPath} (${width * scale}×${height * scale} at ${scale}x)`);
+    const dpi = dims.physical ? `, ${Math.round(CSS_PX_PER_IN * scale)} DPI` : "";
+    console.log(`Exported: ${outputPath} (${Math.round(width * scale)}×${Math.round(height * scale)} at ${scale}x${dpi})`);
   }
 
   await browser.close();

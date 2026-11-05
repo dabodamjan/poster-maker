@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 // Take a screenshot of a poster HTML file using Playwright
-// Usage: node scripts/screenshot.js posters/my-poster.html [output.png]
+// Usage: node scripts/screenshot.js posters/my-poster.html [output.png|output.jpg] [--scale N]
+//
+// --scale sets the device scale (default 2). A .jpg output path writes a
+// JPEG at quality 85, which is how the README gallery images are made:
+//   node scripts/screenshot.js posters/x.html assets/examples/x.jpg --scale 1
 
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
-const { parseDimensions } = require('./dimensions');
+const { parseDimensions, renderScale } = require('./dimensions');
 
-async function screenshot(htmlPath, outputPath) {
+async function screenshot(htmlPath, outputPath, requestedScale) {
   const absoluteHtml = path.resolve(htmlPath);
 
   if (!fs.existsSync(absoluteHtml)) {
@@ -26,11 +30,13 @@ async function screenshot(htmlPath, outputPath) {
   const dims = parseDimensions(html);
   const width = dims.cssWidth;
   const height = dims.cssHeight;
+  const scale = renderScale(dims, requestedScale || 2);
+  const jpeg = /\.jpe?g$/i.test(absoluteOutput);
 
   const browser = await chromium.launch();
   const context = await browser.newContext({
     viewport: { width, height },
-    deviceScaleFactor: 2,
+    deviceScaleFactor: scale,
   });
   const page = await context.newPage();
 
@@ -49,20 +55,37 @@ async function screenshot(htmlPath, outputPath) {
   // Wait for fonts to load
   await page.evaluate(() => document.fonts.ready);
 
-  await page.screenshot({ path: absoluteOutput, fullPage: false, clip: { x: 0, y: 0, width, height }, omitBackground: dims.transparent });
+  await page.screenshot({
+    path: absoluteOutput,
+    fullPage: false,
+    clip: { x: 0, y: 0, width, height },
+    omitBackground: dims.transparent && !jpeg,
+    ...(jpeg ? { quality: 85 } : {}),
+  });
   await browser.close();
 
-  console.log(`Screenshot saved: ${absoluteOutput} (${width * 2}×${height * 2} at 2x)`);
+  console.log(`Screenshot saved: ${absoluteOutput} (${Math.round(width * scale)}×${Math.round(height * scale)} at ${scale}x)`);
   return absoluteOutput;
 }
 
 const args = process.argv.slice(2);
+const scaleIndex = args.indexOf('--scale');
+let requestedScale;
+if (scaleIndex !== -1) {
+  requestedScale = parseFloat(args[scaleIndex + 1]);
+  if (!(requestedScale > 0)) {
+    console.error('--scale needs a positive number, e.g. --scale 1');
+    process.exit(1);
+  }
+  args.splice(scaleIndex, 2);
+}
+
 if (!args[0]) {
-  console.error('Usage: node scripts/screenshot.js <poster.html> [output.png]');
+  console.error('Usage: node scripts/screenshot.js <poster.html> [output.png|output.jpg] [--scale N]');
   process.exit(1);
 }
 
-screenshot(args[0], args[1]).catch(err => {
+screenshot(args[0], args[1], requestedScale).catch(err => {
   console.error(err);
   process.exit(1);
 });
