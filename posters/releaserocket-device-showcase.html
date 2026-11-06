@@ -5,7 +5,7 @@
 <title>ReleaseRocket device showcase</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <!--
   DEVICE SHOWCASE (1920x1080 landscape)
   =====================================
@@ -41,16 +41,16 @@
 <style>
   /* THEME TOKENS (swap step 1) */
   :root {
-    --canvas-top:    #1A1310;  /* gradient start (upper) */
-    --canvas-bottom: #0B0908;  /* gradient end (lower)   */
-    --accent:        #e66233;  /* glow + wordmark accent, the one brand knob */
-    --frame-bg:      #14100d;  /* fill behind a screenshot while it loads    */
-    --chrome-bg:     #211b15;  /* browser titlebar + phone body              */
-    --chrome-edge:   rgba(239, 231, 215, 0.10); /* frame hairline border     */
-    --url-fill:      #14100d;  /* browser url-bar pill fill                  */
-    --url-text:      #a3967f;  /* browser url-bar text                       */
-    --text:          #efe7d7;  /* wordmark name                              */
-    --muted:         #a3967f;  /* wordmark url                               */
+    --canvas-top:    #0c2a45;  /* gradient start (upper) */
+    --canvas-bottom: #04182a;  /* gradient end (lower)   */
+    --accent:        #e6c15c;  /* glow + wordmark accent, the one brand knob */
+    --frame-bg:      #061f35;  /* fill behind a screenshot while it loads    */
+    --chrome-bg:     #10304a;  /* browser titlebar + phone body              */
+    --chrome-edge:   rgba(245, 240, 228, 0.10); /* frame hairline border     */
+    --url-fill:      #061f35;  /* browser url-bar pill fill                  */
+    --url-text:      #b8b4a6;  /* browser url-bar text                       */
+    --text:          #f5f0e4;  /* wordmark name                              */
+    --muted:         #b8b4a6;  /* wordmark url                               */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,10 +64,10 @@
   body {
     position: relative;
     background:
-      radial-gradient(1300px 820px at 62% 26%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 60%),
-      radial-gradient(900px 680px at 16% 82%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 62%),
+      radial-gradient(1300px 820px at 62% 26%, color-mix(in srgb, var(--accent) 6%, transparent), transparent 60%),
+      radial-gradient(900px 680px at 16% 82%, color-mix(in srgb, var(--accent) 4%, transparent), transparent 62%),
       linear-gradient(165deg, var(--canvas-top) 0%, var(--canvas-bottom) 100%);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'DM Mono', monospace;
     color: var(--text);
   }
 
@@ -117,7 +117,7 @@
   .urlbar {
     margin-left: 22px; flex: 1; height: 34px; border-radius: 9px; background: var(--url-fill);
     display: flex; align-items: center; padding: 0 20px; gap: 12px;
-    font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 20px; color: var(--url-text);
+    font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px; color: var(--url-text);
   }
   .urlbar .lock { width: 13px; height: 13px; border-radius: 3px; border: 2px solid var(--url-text); opacity: 0.75; }
   .window .shot {
@@ -127,13 +127,14 @@
 
   /* WORDMARK (corner, small) */
   .wordmark { position: absolute; left: 72px; bottom: 60px; z-index: 6; display: inline-flex; align-items: center; gap: 16px; }
-  .wm-mark { width: 34px; height: 37px; display: block; }
+  .wm-mark { width: 31px; height: 30px; display: block; color: var(--accent); }
   .wm-name {
-    font-family: 'Fraunces', serif; font-optical-sizing: auto;
-    font-weight: 600; font-size: 30px; color: var(--text); letter-spacing: -0.02em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500; font-size: 36px; color: var(--text); letter-spacing: -0.01em; line-height: 1;
   }
-  .wm-sep { width: 2px; height: 27px; background: rgba(239, 231, 215, 0.18); margin: 0 7px; }
-  .wm-url { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 23px; color: var(--muted); letter-spacing: 0.04em; }
+  .wm-name em { font-style: italic; color: var(--accent); }
+  .wm-sep { width: 2px; height: 27px; background: rgba(245, 240, 228, 0.18); margin: 0 7px; }
+  .wm-url { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 23px; color: var(--muted); letter-spacing: 0.04em; }
 
   @media screen {
     html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
@@ -167,17 +168,12 @@
 
   <!-- WORDMARK (swap step 4: mark SVG + name + url) -->
   <div class="wordmark">
-    <svg class="wm-mark" viewBox="66 54 228 246" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
-      <defs>
-        <linearGradient id="emberShowcase" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#F2854A"/>
-          <stop offset="100%" stop-color="#D9551F"/>
-        </linearGradient>
-      </defs>
-      <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#emberShowcase)"/>
-      <polygon points="180,244 146,300 214,300" fill="url(#emberShowcase)"/>
+    <!-- 30px, so the small drawing: assets/releaserocket-brand/releaserocket-mark-24.svg -->
+    <svg class="wm-mark" viewBox="84 88 187 180" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+      <path d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+      <path d="M140.6 205.3 C142.4 203.4 145.4 203.4 147.4 205.4 C149.3 207.4 149.3 210.2 147.2 212.1 L86 265 Z"/>
     </svg>
-    <span class="wm-name">ReleaseRocket</span>
+    <span class="wm-name">Release<em>Rocket</em></span>
     <span class="wm-sep"></span>
     <span class="wm-url">releaserocket.io</span>
   </div>

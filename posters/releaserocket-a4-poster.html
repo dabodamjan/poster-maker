@@ -5,166 +5,128 @@
 <title>ReleaseRocket A4 print poster</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* A4 at the CSS standard 96px per inch = 794 x 1123 CSS px. */
+  /* A4 at the CSS standard 96px per inch = 794 x 1123 CSS px.
+     Light brand variant: ground #f7f1e1, ink #082a45, ochre #88620c for
+     gold on light (the gold itself fails contrast on paper). */
   body {
     width: 210mm;
     height: 297mm;
-    background: #161210;
-    color: #efe7d7;
-    font-family: 'Inter', system-ui, sans-serif;
+    background: #f7f1e1;
+    color: #082a45;
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    font-variant-numeric: lining-nums;
     overflow: hidden;
     position: relative;
-  }
-
-  /* One soft ember glow, kept low for print restraint. */
-  .glow {
-    position: absolute;
-    top: -180px;
-    right: -140px;
-    width: 620px;
-    height: 620px;
-    background: radial-gradient(circle, rgba(230, 98, 51, 0.10) 0%, rgba(230, 98, 51, 0) 68%);
-    pointer-events: none;
-  }
-
-  /* Grain, 4%. */
-  .grain {
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
-    opacity: 0.04;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-    z-index: 5;
   }
 
   .sheet {
     position: relative;
     z-index: 2;
     height: 100%;
-    padding: 68px 64px 60px;
+    padding: 64px 64px 56px;
     display: flex;
     flex-direction: column;
   }
 
-  /* ---------- head ---------- */
+  .top { display: flex; align-items: center; justify-content: space-between; }
+
+  .lockup { display: flex; align-items: center; gap: 10px; }
+  .lockup svg { width: 25px; height: 24px; display: block; }
+  .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .wordmark em { font-style: italic; color: #88620c; }
 
   .kicker {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 15px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.2em;
-    color: #e66233;
+    letter-spacing: 0.22em;
+    color: #88620c;
     text-transform: uppercase;
   }
 
   .title {
-    margin-top: 30px;
-    font-family: 'Fraunces', serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-size: 64px;
-    line-height: 1.08;
-    letter-spacing: -0.035em;
-    color: #efe7d7;
+    margin-top: 72px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 86px;
+    line-height: 0.96;
+    letter-spacing: -0.015em;
   }
-
-  .title .dot { color: #e66233; }
+  .title em { font-style: italic; color: #88620c; }
 
   .lede {
-    margin-top: 22px;
-    max-width: 520px;
-    font-size: 17px;
-    line-height: 1.6;
-    color: #a3967f;
+    margin-top: 28px;
+    max-width: 540px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #4e6273;
   }
 
-  .rule-strong {
-    margin-top: 40px;
-    height: 1px;
-    background: #352d22;
-  }
-
-  /* ---------- steps ---------- */
+  /* Trajectory band: the dotted arc and jet between the title and the steps. */
+  .flight { display: block; width: 666px; height: 190px; margin-top: 20px; }
 
   .steps {
     flex: 1;
     display: flex;
     flex-direction: column;
+    border-top: 1px solid rgba(8, 42, 69, 0.18);
   }
 
   .step {
     flex: 1;
     display: flex;
     align-items: center;
-    gap: 30px;
-    border-bottom: 1px solid #352d22;
+    gap: 28px;
+    border-bottom: 1px solid rgba(8, 42, 69, 0.18);
   }
 
   .step-num {
-    flex: 0 0 84px;
-    font-family: 'Fraunces', serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-size: 46px;
+    flex: 0 0 64px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 52px;
     line-height: 1;
-    letter-spacing: -0.02em;
-    color: #e66233;
-    font-variant-numeric: lining-nums tabular-nums;
+    color: #88620c;
   }
-
-  .step-body { flex: 1; }
 
   .step-title {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: #efe7d7;
   }
 
   .step-sub {
-    margin-top: 7px;
-    font-size: 16px;
-    line-height: 1.45;
-    color: #a3967f;
+    margin-top: 6px;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: #4e6273;
+    max-width: 520px;
   }
-
-  /* ---------- foot ---------- */
 
   .foot {
-    padding-top: 42px;
+    padding-top: 30px;
     display: flex;
-    align-items: center;
-    gap: 18px;
-  }
-
-  .foot svg { display: block; width: 36px; height: 36px; }
-
-  .foot-price {
-    font-family: 'IBM Plex Mono', monospace;
+    align-items: baseline;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
     font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: #a3967f;
-    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
+  .foot .price { color: #4e6273; }
+  .foot .price b { font-weight: 500; color: #88620c; }
+  .foot .url { font-weight: 500; }
 
-  .foot-url {
-    margin-left: auto;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: #e66233;
-    text-transform: uppercase;
-  }
-
-  /* Fit-to-window preview */
   @media screen {
     html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
     body { flex-shrink: 0; }
@@ -176,65 +138,67 @@
 </style>
 </head>
 <body>
-  <div class="glow"></div>
-
   <div class="sheet">
-    <div class="kicker">ReleaseRocket</div>
+    <div class="top">
+      <div class="lockup">
+        <!-- 24px, so the small drawing: assets/releaserocket-brand/releaserocket-mark-24.svg -->
+        <svg viewBox="84 88 187 180" fill="#88620c" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+          <path d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+          <path d="M140.6 205.3 C142.4 203.4 145.4 203.4 147.4 205.4 C149.3 207.4 149.3 210.2 147.2 212.1 L86 265 Z"/>
+        </svg>
+        <span class="wordmark">Release<em>Rocket</em></span>
+      </div>
+      <div class="kicker">How it works</div>
+    </div>
 
-    <h1 class="title">Push code,<br>publish everywhere<span class="dot">.</span></h1>
+    <h1 class="title">One release in,<br><em>every channel</em> out.</h1>
 
-    <p class="lede">Turns your GitHub releases into a changelog, social posts, blog drafts, and email. Written by AI, reviewed by you.</p>
+    <p class="lede">Give every release a clear announcement on your changelog, social channels, email, and more. We build the drafts from your GitHub releases.</p>
 
-    <div class="rule-strong"></div>
+    <!-- Mark paths: assets/releaserocket-brand/releaserocket-mark.svg (locked geometry) -->
+    <svg class="flight" viewBox="-560 70 1040 297" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="trailA4" gradientUnits="userSpaceOnUse" x1="-540" y1="350" x2="144" y2="209">
+          <stop offset="0" stop-color="#88620c" stop-opacity="0"/>
+          <stop offset="1" stop-color="#88620c" stop-opacity="0.85"/>
+        </linearGradient>
+      </defs>
+      <path d="M-550 352 C-300 352 -60 330 40 300 C80 280 112 240 144 208.7" fill="none" stroke="url(#trailA4)" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 12"/>
+      <g fill="#88620c">
+        <path d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+        <path d="M144.5 205.1 C143.2 205.8 88.4 261.5 86.8 263.7 C85.7 265.2 86.8 265 88.5 263.6 C93.6 259.1 108.3 245.9 118.8 236.4 C146.4 211.6 149 209.2 149.1 208.3 C149.3 207.2 148.6 205.5 147.7 205 C146.8 204.5 145.6 204.5 144.5 205.1 Z"/>
+      </g>
+    </svg>
 
     <div class="steps">
       <div class="step">
-        <div class="step-num">01</div>
+        <div class="step-num">1</div>
         <div class="step-body">
-          <div class="step-title">Connect your GitHub repo</div>
-          <div class="step-sub">One click, read-only access.</div>
+          <div class="step-title">Release detected</div>
+          <div class="step-sub">Push a tag and the webhook wakes ReleaseRocket, or start a release by hand.</div>
         </div>
       </div>
       <div class="step">
-        <div class="step-num">02</div>
+        <div class="step-num">2</div>
         <div class="step-body">
-          <div class="step-title">Tag a release</div>
-          <div class="step-sub">Ship the way you already ship.</div>
+          <div class="step-title">Drafts prepared</div>
+          <div class="step-sub">It reads the commits between your tags and the merged pull requests, and drafts a changelog plus a tailored version for each channel.</div>
         </div>
       </div>
       <div class="step">
-        <div class="step-num">03</div>
+        <div class="step-num">3</div>
         <div class="step-body">
-          <div class="step-title">AI drafts every announcement</div>
-          <div class="step-sub">Changelog, social posts, blog draft, email.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-body">
-          <div class="step-title">You review, it publishes</div>
-          <div class="step-sub">Nothing goes out without your eyes on it.</div>
+          <div class="step-title">You approve</div>
+          <div class="step-sub">Nothing publishes on its own. Edit, approve, send.</div>
         </div>
       </div>
     </div>
 
     <div class="foot">
-      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="emberA4" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F2854A"/>
-            <stop offset="100%" stop-color="#D9551F"/>
-          </linearGradient>
-        </defs>
-        <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#emberA4)"/>
-        <polygon points="180,244 146,300 214,300" fill="url(#emberA4)"/>
-      </svg>
-      <div class="foot-price">$19/mo flat &middot; 7-day free trial</div>
-      <div class="foot-url">releaserocket.io</div>
+      <div class="price">One flat price &middot; <b>$21 a month</b></div>
+      <div class="url">releaserocket.io</div>
     </div>
   </div>
-
-  <div class="grain"></div>
 
   <script>
     (function() {

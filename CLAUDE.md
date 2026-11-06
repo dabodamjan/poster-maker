@@ -13,7 +13,7 @@ assets/            Images, logos, photos for use in posters
 scripts/
   export.js        Playwright PNG/PDF export (auto-detects dimensions)
   screenshot.js    Playwright preview screenshots (auto-detects dimensions)
-  dimensions.js    Shared body-CSS dimension parsing (px, mm, in)
+  dimensions.js    Shared body-CSS dimension parsing (px, mm, in) and the render-scale cap for very large formats
   screenshot-url.js  Capture a LIVE URL at device viewports into assets/<slug>/ (GPU forced on for WebGL sites)
   frame-screenshot.js  Frame a screenshot on a social-ready canvas (screenshot-frame.html is its template)
   remove-bg.py     Background removal (requires rembg)
@@ -53,6 +53,22 @@ scripts/
 - Playwright is installed (`npm install` then `npx playwright install chromium`).
 - Use `node scripts/screenshot.js posters/<file>.html` to take a screenshot at the poster's dimensions (auto-detected from the HTML).
 - Screenshots save to `exports/<name>-preview.png`. Always screenshot after creating/editing a poster — read the PNG to visually verify the layout before showing to the user.
+- `--scale N` sets the device scale, and an output path ending in `.jpg` writes a JPEG: `node scripts/screenshot.js posters/<file>.html assets/examples/<file>.jpg --scale 1` is how the README gallery images are made.
+
+## Formats
+
+The base formats (`story`, `square`, `landscape`, `github`, `og`, `youtube`, `a4`, `a3`, `business-card`) are listed in `.claude/commands/new-poster.md`. Business-graphics formats, each with a ReleaseRocket example in `posters/`:
+
+- `linkedin-cover`: 1512x256 px. The Page logo overlaps the lower left on desktop; keep text right of ~440px.
+- `email-header`: 600x200 px, exports at 1200x400 for high-density screens.
+- `a4` as letterhead: 210x297 mm, white sheet, nothing at the trim so it prints without bleed.
+- `rollup`: 850x2000 mm. Keep the bottom 150 mm free of content (it can disappear into the stand's base). The PNG export is capped at 64 megapixels (about 155 DPI here); send the PDF.
+- `tshirt-front`: 600x600 px, a 4x4 in left-chest print file (2x export = 300 DPI).
+- `tshirt-back`: 1800x2400 px, a 12x16 in back print file (2x export = 300 DPI).
+- `sticker`: 3x3 in die-cut.
+- `mug-11oz`: 200x96 mm sublimation wrap; the two short edges meet at the handle.
+
+Merch print files (`tshirt-*`, `sticker`) set `background: transparent` so the export is an alpha PNG. On a die-cut sticker the transparent area defines the cut line, so draw a solid white border (0.1 in or more). On garments use solid colours only: semi-transparent pixels print unpredictably on DTG. Keep merch restrained and mark-led, legible from a distance. A print file alone shows nothing in a gallery, so pair it with a separate preview poster that draws the design in use (garment, mug, or laptop lid in CSS/SVG).
 
 ## Iteration Discipline — IMPORTANT
 

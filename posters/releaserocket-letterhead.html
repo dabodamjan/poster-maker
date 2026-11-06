@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReleaseRocket A4 Letterhead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  A4 LETTERHEAD (210 x 297 mm)
+  ============================
+  Physical units, so export.js gives a true-size A4 PDF (--pdf) and a
+  384 DPI PNG. White sheet with the light brand values: ink #082a45 for
+  text, ochre #88620c for the mark and accents (the brand gold fails
+  contrast on paper). Nothing touches the trim, so it prints on an office
+  printer without bleed.
+
+  The letter text is a placeholder: replace the .letter block with your
+  own, or delete it to get a blank letterhead.
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 210mm;
+    height: 297mm;
+    background: #ffffff;
+    color: #082a45;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-variant-numeric: lining-nums;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sheet {
+    position: absolute;
+    inset: 0;
+    padding: 18mm 20mm 14mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6mm;
+    border-bottom: 1px solid #88620c;
+  }
+
+  .lockup { display: flex; align-items: center; gap: 9px; }
+  .lockup svg { width: 25px; height: 24px; display: block; }
+  .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 27px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .wordmark em { font-style: italic; color: #88620c; }
+
+  .letter {
+    margin-top: 22mm;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 150mm;
+  }
+  .letter .date { color: #4e6273; margin-bottom: 10mm; }
+  .letter p + p { margin-top: 4.5mm; }
+  .letter .sign { margin-top: 10mm; }
+
+  .spacer { flex: 1; }
+
+  .foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 4mm;
+    border-top: 1px solid rgba(8, 42, 69, 0.16);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #4e6273;
+    text-transform: uppercase;
+  }
+  .foot .tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #082a45;
+  }
+  .foot .tag em { color: #88620c; }
+
+  @media screen {
+    html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
+    body { flex-shrink: 0; }
+  }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="head">
+      <div class="lockup">
+        <!-- 24px, so the small drawing: assets/releaserocket-brand/releaserocket-mark-24.svg -->
+        <svg viewBox="84 88 187 180" fill="#88620c" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
+          <path d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+          <path d="M140.6 205.3 C142.4 203.4 145.4 203.4 147.4 205.4 C149.3 207.4 149.3 210.2 147.2 212.1 L86 265 Z"/>
+        </svg>
+        <span class="wordmark">Release<em>Rocket</em></span>
+      </div>
+    </div>
+
+    <div class="letter">
+      <div class="date">Date</div>
+      <p>Dear reader,</p>
+      <p>This is the ReleaseRocket letterhead. Your letter goes here, set in Hanken Grotesk at 14 px in the brand ink, with the margins already in place.</p>
+      <p>Replace this block with your own text, or delete it for a blank sheet. Export with <code>--pdf</code> for a true-size A4 page.</p>
+      <p class="sign">Name<br>Role</p>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="foot">
+      <span class="tag">Reach more people with <em>every</em> release.</span>
+      <span>releaserocket.io</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const rect = document.body.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      function fit() {
+        const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+        document.body.style.transform = 'scale(' + s + ')';
+        document.body.style.transformOrigin = 'top left';
+        document.body.style.position = 'absolute';
+        document.body.style.left = ((window.innerWidth - w * s) / 2) + 'px';
+        document.body.style.top = ((window.innerHeight - h * s) / 2) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
+  </script>
+</body>
+</html>

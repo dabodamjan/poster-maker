@@ -6,24 +6,47 @@ Describe a flyer, poster, or social media graphic in [Claude Code](https://claud
 
 ## What you can make
 
-Event flyers, Instagram Stories and posts, product launch posters, conference posters, app icons, GitHub social previews, and print posters. Every design is code: the headline stays real text, and spacing, colors, and type sizes stay editable CSS.
+Event flyers, Instagram Stories and posts, product launch posters, conference posters, app icons, GitHub social previews, and print posters, plus the everyday business graphics: LinkedIn covers, email headers, letterheads, roll-up banners, and print files for T-shirts, stickers, and mugs. Every design is code: the headline stays real text, and spacing, colors, and type sizes stay editable CSS.
 
 ![Hero graphic reading Describe the poster. Get the file. with the generating command and the exported launch flyer beside it](assets/poster-maker-hero.jpg)
 
 *This image is itself a Poster Maker poster, showing the command and the flyer it produced. Source: [`posters/poster-maker-hero.html`](posters/poster-maker-hero.html)*
 
-The rest of the gallery markets [ReleaseRocket](https://www.releaserocket.io/), my SaaS: real brand, real product copy, every design a single HTML file in this repo.
+The rest of the gallery markets [ReleaseRocket](https://www.releaserocket.io/), my SaaS: real brand (silk gold on deep silk blue), real product copy, every design a single HTML file in this repo.
+
+### Social and web
 
 | Example | Preview | Source |
 |---|---|---|
-| Event flyer, 1080x1920 Instagram Story | <img src="assets/examples/releaserocket-event-flyer.jpg" width="190" alt="Launch Night event flyer with large serif headline, ember rocket mark, and date, venue, and RSVP details on a warm dark background"> | [`releaserocket-event-flyer.html`](posters/releaserocket-event-flyer.html) |
-| Instagram post, 1080x1080 | <img src="assets/examples/releaserocket-instagram-post.jpg" width="240" alt="Feature announcement square reading One release. Every channel. with four channel chips and pricing"> | [`releaserocket-instagram-post.html`](posters/releaserocket-instagram-post.html) |
-| YouTube thumbnail, 1280x720 | <img src="assets/examples/releaserocket-youtube-thumbnail.jpg" width="320" alt="YouTube thumbnail reading One push. Every channel. next to the ReleaseRocket app icon"> | [`releaserocket-youtube-thumbnail.html`](posters/releaserocket-youtube-thumbnail.html) |
-| Blog cover / OG image, 1200x630 | <img src="assets/examples/releaserocket-blog-cover.jpg" width="320" alt="Blog cover reading Your changelog is a marketing channel with the ReleaseRocket mark and pricing footer"> | [`releaserocket-blog-cover.html`](posters/releaserocket-blog-cover.html) |
-| A4 print poster, 210x297 mm | <img src="assets/examples/releaserocket-a4-poster.jpg" width="190" alt="A4 print poster titled Push code, publish everywhere with four numbered steps explaining how ReleaseRocket works"> | [`releaserocket-a4-poster.html`](posters/releaserocket-a4-poster.html) |
-| Business card, 3.5x2 in | <img src="assets/examples/releaserocket-business-card.jpg" width="280" alt="Dark business card with centered ReleaseRocket mark, wordmark, tagline, and website address"> | [`releaserocket-business-card.html`](posters/releaserocket-business-card.html) |
-| App icon, 1024x1024 transparent | <img src="assets/examples/releaserocket-app-icon.png" width="190" alt="ReleaseRocket app icon, an ember orange rocket mark on a dark rounded tile with a transparent background around it"> | [`releaserocket-app-icon.html`](posters/releaserocket-app-icon.html) |
-| Device showcase from a live site, 1920x1080 | <img src="assets/examples/releaserocket-device-showcase.jpg" width="320" alt="releaserocket.io shown inside a macOS browser window and a phone frame on a warm dark canvas"> | [`releaserocket-device-showcase.html`](posters/releaserocket-device-showcase.html) |
+| Event flyer, 1080x1920 Instagram Story | <img src="assets/examples/releaserocket-event-flyer.jpg" width="190" alt="Launch night event flyer with a large serif headline, a gold rocket mark on a dotted trajectory, and date, city, and entry details on deep blue"> | [`releaserocket-event-flyer.html`](posters/releaserocket-event-flyer.html) |
+| Instagram post, 1080x1080 | <img src="assets/examples/releaserocket-instagram-post.jpg" width="240" alt="Square post reading Reach more people with every release, with four channel chips and the monthly price on deep blue"> | [`releaserocket-instagram-post.html`](posters/releaserocket-instagram-post.html) |
+| YouTube thumbnail, 1280x720 | <img src="assets/examples/releaserocket-youtube-thumbnail.jpg" width="320" alt="Light thumbnail reading One release in. Every channel out. next to the blue ReleaseRocket app tile"> | [`releaserocket-youtube-thumbnail.html`](posters/releaserocket-youtube-thumbnail.html) |
+| Blog cover / OG image, 1200x630 | <img src="assets/examples/releaserocket-blog-cover.jpg" width="320" alt="Blog cover reading Your changelog is a marketing channel, with the ReleaseRocket wordmark and a channel list footer"> | [`releaserocket-blog-cover.html`](posters/releaserocket-blog-cover.html) |
+| LinkedIn company page cover, 1512x256 | <img src="assets/examples/releaserocket-linkedin-cover.jpg" width="320" alt="Wide LinkedIn cover with a gold rocket on a dotted trajectory at the left and the tagline at the right"> | [`releaserocket-linkedin-cover.html`](posters/releaserocket-linkedin-cover.html) |
+| Email newsletter header, 600x200 | <img src="assets/examples/releaserocket-email-header.jpg" width="320" alt="Email header with the ReleaseRocket wordmark, the title Product updates, and a small rocket trajectory"> | [`releaserocket-email-header.html`](posters/releaserocket-email-header.html) |
+| Device showcase from a live site, 1920x1080 | <img src="assets/examples/releaserocket-device-showcase.jpg" width="320" alt="releaserocket.io shown inside a macOS browser window and a phone frame on a deep blue canvas"> | [`releaserocket-device-showcase.html`](posters/releaserocket-device-showcase.html) |
+| App icon, 1024x1024 transparent | <img src="assets/examples/releaserocket-app-icon.png" width="190" alt="ReleaseRocket app icon, a gold rocket mark on a deep blue rounded tile with a transparent background around it"> | [`releaserocket-app-icon.html`](posters/releaserocket-app-icon.html) |
+
+### Print
+
+| Example | Preview | Source |
+|---|---|---|
+| A4 print poster, 210x297 mm | <img src="assets/examples/releaserocket-a4-poster.jpg" width="190" alt="Light A4 poster titled One release in, every channel out, with three numbered steps explaining how ReleaseRocket works"> | [`releaserocket-a4-poster.html`](posters/releaserocket-a4-poster.html) |
+| A4 letterhead, 210x297 mm | <img src="assets/examples/releaserocket-letterhead.jpg" width="190" alt="White A4 letterhead with the ReleaseRocket wordmark and a gold rule at the top, placeholder letter text, and a tagline footer"> | [`releaserocket-letterhead.html`](posters/releaserocket-letterhead.html) |
+| Roll-up banner, 850x2000 mm | <img src="assets/examples/releaserocket-rollup-banner.jpg" width="120" alt="Tall trade-show banner with the wordmark, a large serif tagline, a rocket trajectory, a channel list, and the web address"> | [`releaserocket-rollup-banner.html`](posters/releaserocket-rollup-banner.html) |
+| Business card, 3.5x2 in | <img src="assets/examples/releaserocket-business-card.jpg" width="280" alt="Deep blue business card with a centered gold rocket mark, wordmark, tagline, and web address"> | [`releaserocket-business-card.html`](posters/releaserocket-business-card.html) |
+
+### Merch
+
+Each merch example is two things: a print file to send to a print-on-demand service, and a preview that shows it in use, drawn in CSS and SVG.
+
+| Example | Preview | Print file | Preview source |
+|---|---|---|---|
+| T-shirt, 4x4 in left chest + 12x16 in back, transparent PNG | <img src="assets/examples/releaserocket-tshirt-mockup.jpg" width="320" alt="Front and back of a navy T-shirt: a small ReleaseRocket wordmark on the left chest, a rocket trajectory and tagline on the back"> | [`tshirt-front`](posters/releaserocket-tshirt-front.html), [`tshirt-back`](posters/releaserocket-tshirt-back.html) | [`releaserocket-tshirt-mockup.html`](posters/releaserocket-tshirt-mockup.html) |
+| Die-cut sticker, 3x3 in, transparent PNG with white border | <img src="assets/examples/releaserocket-sticker-mockup.jpg" width="320" alt="Rounded app-tile sticker with a white border on a grey laptop lid"> | [`sticker`](posters/releaserocket-sticker.html) | [`releaserocket-sticker-mockup.html`](posters/releaserocket-sticker-mockup.html) |
+| 11 oz mug wrap, 200x96 mm | <img src="assets/examples/releaserocket-mug-mockup.jpg" width="320" alt="Two deep blue mugs, one showing the rocket on its trajectory, the other the stacked ReleaseRocket wordmark"> | [`mug-wrap`](posters/releaserocket-mug-wrap.html) | [`releaserocket-mug-mockup.html`](posters/releaserocket-mug-mockup.html) |
+
+Print and merch sizes vary by printer and platform. Each file's header comment names the spec it follows and where it came from; check your own printer's template before you order.
 
 ## Quickstart
 
@@ -148,12 +171,19 @@ Exports land in `exports/`. Run `/export-poster` without a filename and it lists
 | `github` | 1280x640 px | GitHub social preview, 2:1 |
 | `og` | 1200x630 px | Blog cover and social link preview |
 | `youtube` | 1280x720 px | YouTube thumbnail |
-| `a4` | 210x297 mm | Print, see the print note |
+| `linkedin-cover` | 1512x256 px | LinkedIn company page cover |
+| `email-header` | 600x200 px | Email newsletter header, exports at 1200x400 for sharp display |
+| `a4` | 210x297 mm | Print poster or letterhead, see the print note |
 | `a3` | 297x420 mm | Print, see the print note |
 | `business-card` | 3.5x2 in | Print, see the print note |
+| `rollup` | 850x2000 mm | Roll-up trade-show banner, see the print note |
+| `tshirt-front` | 600x600 px | 4x4 in left-chest print file, transparent, 300 DPI at export |
+| `tshirt-back` | 1800x2400 px | 12x16 in back print file, transparent, 300 DPI at export |
+| `sticker` | 3x3 in | Die-cut sticker, transparent with a white cut border |
+| `mug-11oz` | 200x96 mm | 11 oz mug sublimation wrap |
 | Custom | any `WxH` in px | For example `1024x1024` |
 
-**Print note:** posters sized in physical units in the body CSS (`width: 210mm`, `width: 3.5in`, cm works too) export as PDFs with the true physical page size and as PNGs at 4x device scale, which is 384 DPI. Pixel-sized posters export at 2x.
+**Print note:** posters sized in physical units in the body CSS (`width: 210mm`, `width: 3.5in`, cm works too) export as PDFs with the true physical page size and as PNGs at 4x device scale, which is 384 DPI. Pixel-sized posters export at 2x. Very large formats render at a lower scale so the PNG stays under 64 megapixels: an 850x2000 mm roll-up banner exports at about 155 DPI, and the export log prints the DPI. For banners, send the PDF.
 
 ## How it works
 
@@ -162,6 +192,12 @@ Each poster is a single HTML file in `posters/` with all CSS inline. No framewor
 The HTML body defines the poster dimensions. A small fit-to-window script scales the design to your browser window for previews without affecting the export.
 
 For exports, [Playwright](https://playwright.dev/) launches headless Chromium, reads the body dimensions from the HTML, waits for fonts to load, disables the preview scaling, and captures a PNG (2x device scale, 4x for physical-unit posters) or a PDF. A transparent PNG is produced when the body CSS declares `background: transparent`.
+
+`scripts/screenshot.js` also takes `--scale N` and writes a JPEG when the output path ends in `.jpg`, which is how the gallery images above are made:
+
+```bash
+node scripts/screenshot.js posters/releaserocket-event-flyer.html assets/examples/releaserocket-event-flyer.jpg --scale 1
+```
 
 All the design knowledge, including font pairings, color palettes, layout rules, and Instagram safe zones, lives in [`.claude/commands/`](.claude/commands/) and `CLAUDE.md`. Tweak them to match your own style. That is the part no template editor gives you: the design system itself is plain text you can edit.
 

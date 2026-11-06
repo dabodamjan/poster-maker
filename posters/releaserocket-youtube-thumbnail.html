@@ -5,7 +5,7 @@
 <title>ReleaseRocket YouTube Thumbnail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -14,32 +14,31 @@
     height: 720px;
     overflow: hidden;
     position: relative;
-    background: #161210;
-    color: #efe7d7;
-    font-family: 'Inter', sans-serif;
+    /* Light brand ground so the app tile keeps its exact colours: ink
+       #082a45 text, ochre #88620c accents (gold fails contrast on light). */
+    background: #f7f1e1;
+    color: #082a45;
+    font-variant-numeric: lining-nums;
   }
 
-  /* The single ember glow, sitting behind the mark (the focal point). */
-  .glow {
-    position: absolute;
-    top: 50%;
-    left: 81%;
-    width: 780px;
-    height: 780px;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(230, 98, 51, 0.10) 0%, rgba(230, 98, 51, 0.05) 42%, transparent 70%);
-    pointer-events: none;
-  }
-
-  /* Grain: inline feTurbulence noise, kept low so it reads as paper, not static. */
   .grain {
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
-    opacity: 0.07;
+    opacity: 0.05;
     mix-blend-mode: overlay;
     pointer-events: none;
     z-index: 5;
+  }
+
+  /* Dotted trajectory running into the tile from the lower left. */
+  .trail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1280px;
+    height: 720px;
+    z-index: 0;
   }
 
   .stage {
@@ -49,65 +48,44 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 64px 48px 64px 64px;
+    padding: 64px 72px 64px 72px;
   }
 
-  /* Sized so the longest headline line ("Every channel." at 140px Fraunces,
-     measured at 747px) clears the mark with room to breathe. */
-  .left {
-    flex: 0 0 auto;
-    width: 780px;
-  }
+  .left { flex: 0 0 auto; width: 800px; }
 
   .pill {
     display: inline-block;
-    padding: 10px 26px 12px;
-    border: 1px solid #352d22;
+    padding: 12px 26px 13px;
+    border: 2px solid #88620c;
     border-radius: 999px;
-    background: #1d1813;
-    color: #e66233;
-    font-family: 'IBM Plex Mono', monospace;
+    color: #88620c;
+    font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 40px;
+    font-size: 34px;
     letter-spacing: 0.14em;
-    /* letter-spacing leaves dead space after the last glyph. Matching it with
-       text-indent adds the same space before the first, so the shrink-to-fit
-       pill ends up optically centred on its letters. */
     text-indent: 0.14em;
     line-height: 1;
-    margin-bottom: 54px;
+    margin-bottom: 44px;
   }
 
   .headline {
-    font-family: 'Fraunces', serif;
-    font-optical-sizing: auto;
-    font-weight: 620;
-    font-size: 140px;
-    line-height: 0.98;
-    letter-spacing: -0.035em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 132px;
+    line-height: 0.92;
+    letter-spacing: -0.015em;
   }
-
-  .headline span {
-    display: block;
-  }
-
-  .headline .accent {
-    color: #e66233;
-  }
+  .headline span { display: block; }
+  .headline em { font-style: italic; color: #88620c; }
 
   .right {
     flex: 1 1 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
-  .tile {
-    width: 336px;
-    height: 336px;
-    display: block;
-    transform: rotate(-6deg);
-  }
+  .tile { width: 320px; height: 320px; display: block; }
 
   @media screen {
     html { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f1010; }
@@ -120,33 +98,34 @@
 </style>
 </head>
 <body>
-  <div class="glow"></div>
+  <svg class="trail" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="trailYt" gradientUnits="userSpaceOnUse" x1="560" y1="700" x2="1000" y2="470">
+        <stop offset="0" stop-color="#88620c" stop-opacity="0"/>
+        <stop offset="1" stop-color="#88620c" stop-opacity="0.8"/>
+      </linearGradient>
+    </defs>
+    <path d="M560 708 C720 700 880 640 960 540" fill="none" stroke="url(#trailYt)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 10"/>
+  </svg>
 
   <div class="stage">
     <div class="left">
       <div class="pill">RELEASEROCKET</div>
       <div class="headline">
-        <span>One push.</span>
-        <span class="accent">Every channel.</span>
+        <span>One release in.</span>
+        <span><em>Every channel</em></span>
+        <span><em>out.</em></span>
       </div>
     </div>
 
     <div class="right">
+      <!-- The locked app tile: assets/releaserocket-brand/releaserocket-tile.svg -->
       <svg class="tile" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReleaseRocket">
-        <defs>
-          <linearGradient id="ytEmber" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F2854A"/>
-            <stop offset="100%" stop-color="#D9551F"/>
-          </linearGradient>
-          <radialGradient id="ytTileBg" cx="50%" cy="38%" r="78%">
-            <stop offset="0%" stop-color="#3A2A1F"/>
-            <stop offset="55%" stop-color="#1A1310"/>
-            <stop offset="100%" stop-color="#0B0908"/>
-          </radialGradient>
-        </defs>
-        <rect width="360" height="360" rx="84" fill="url(#ytTileBg)"/>
-        <path d="M180,54 L294,244 L214,244 L180,188 L146,244 L66,244 Z" fill="url(#ytEmber)"/>
-        <polygon points="180,244 146,300 214,300" fill="url(#ytEmber)"/>
+        <rect width="360" height="360" rx="84" fill="#061F35"/>
+        <g fill="#E6C15C" transform="translate(180 180) scale(1.2) translate(-177.7 -177.8)">
+          <path d="M268.6 90.4 C261.3 104.5 251.1 120.7 228.8 150.2 C219.7 162.3 220 161.9 215.7 173.1 C212 182.7 207.5 196.8 202.7 213.8 C200.1 223 197.5 231.6 197.1 232.9 C196 235.6 193.4 240.8 193 241.2 C189.5 233.9 179 211.6 174.3 207 C171.8 204.4 171.3 204.4 163.6 207.2 L157.1 209.6 L144.4 197.3 L146.9 191 C148.3 187.5 149.4 184.1 149.4 183.6 C149.4 182.4 147.9 180.2 146 178.7 C143.3 176.6 137 173.1 125.8 167.3 L114.2 161.5 C116.7 159.7 120.2 158 122.6 157.2 C123.8 156.8 130 155.1 136.3 153.5 C163.3 146.4 175 142.7 189.3 136.7 C195.6 134.1 196.3 133.7 202.1 129.5 C223.2 114.4 247.7 99.2 268.6 90.4 Z"/>
+          <path d="M144.5 205.1 C143.2 205.8 88.4 261.5 86.8 263.7 C85.7 265.2 86.8 265 88.5 263.6 C93.6 259.1 108.3 245.9 118.8 236.4 C146.4 211.6 149 209.2 149.1 208.3 C149.3 207.2 148.6 205.5 147.7 205 C146.8 204.5 145.6 204.5 144.5 205.1 Z"/>
+        </g>
       </svg>
     </div>
   </div>
