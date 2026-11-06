@@ -36,7 +36,7 @@ The user will provide some or all of:
   - `mug-11oz` — 200×96mm sublimation wrap for an 11 oz mug (the two short edges meet at the handle)
   - any custom `WxH` in pixels (e.g., `1024x1024` app icon)
 
-  Each of these has a ReleaseRocket example in `posters/` to start from.
+  The business and merch formats each have a ReleaseRocket example in `posters/` to start from.
 
   For print formats (`a4`, `a3`, `business-card`, `rollup`, `sticker`, `mug-11oz`), size the body in physical units (`width: 210mm`, `width: 3.5in`; cm also works). Both scripts convert physical units to CSS pixels at 96 per inch. The export script renders print PNGs at 4x device scale (384 DPI) and gives PDFs the true physical page size; preview screenshots render at 2x. Very large formats like `rollup` render at a lower scale so the PNG stays under 64 megapixels (about 155 DPI for the roll-up), so send the printer the PDF.
 
