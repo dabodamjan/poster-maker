@@ -26,9 +26,21 @@ The user will provide some or all of:
   - `a3` — 297×420mm print poster
   - `a4` — 210×297mm print poster
   - `business-card` — 3.5×2in print card
+  - `linkedin-cover` — 1512×256 LinkedIn company page cover (the Page logo covers the lower left on desktop, so keep text right of ~440px)
+  - `email-header` — 600×200 newsletter header (exports at 1200×400 for high-density screens)
+  - `a4` as a letterhead — 210×297mm white sheet, nothing at the trim so it prints without bleed
+  - `rollup` — 850×2000mm roll-up banner (keep the bottom 150mm free of content, it can disappear into the stand)
+  - `tshirt-front` — 600×600 left-chest print file, 4×4in at 300 DPI
+  - `tshirt-back` — 1800×2400 back print file, 12×16in at 300 DPI
+  - `sticker` — 3×3in die-cut sticker
+  - `mug-11oz` — 200×96mm sublimation wrap for an 11 oz mug (the two short edges meet at the handle)
   - any custom `WxH` in pixels (e.g., `1024x1024` app icon)
 
-  For print formats (`a4`, `a3`, `business-card`), size the body in physical units (`width: 210mm`, `width: 3.5in`; cm also works). Both scripts convert physical units to CSS pixels at 96 per inch. The export script renders print PNGs at 4x device scale (384 DPI) and gives PDFs the true physical page size; preview screenshots render at 2x.
+  Each of these has a ReleaseRocket example in `posters/` to start from.
+
+  For print formats (`a4`, `a3`, `business-card`, `rollup`, `sticker`, `mug-11oz`), size the body in physical units (`width: 210mm`, `width: 3.5in`; cm also works). Both scripts convert physical units to CSS pixels at 96 per inch. The export script renders print PNGs at 4x device scale (384 DPI) and gives PDFs the true physical page size; preview screenshots render at 2x. Very large formats like `rollup` render at a lower scale so the PNG stays under 64 megapixels (about 155 DPI for the roll-up), so send the printer the PDF.
+
+  For merch print files (`tshirt-*`, `sticker`), set `background: transparent` so the export is an alpha PNG. On a die-cut sticker the transparent area is the cut line, so draw a solid white border of 0.1in or more. On garments use solid colours only, since semi-transparent pixels print unpredictably. Keep merch restrained and mark-led, readable from a distance. A print file shows nothing on its own, so also make a separate preview poster that draws the design in use (a shirt, mug, or laptop lid in CSS/SVG).
 
 ### Design Principles
 

@@ -57,7 +57,7 @@ scripts/
 
 ## Formats
 
-The base formats (`story`, `square`, `landscape`, `github`, `og`, `youtube`, `a4`, `a3`, `business-card`) are listed in `.claude/commands/new-poster.md`. Business-graphics formats, each with a ReleaseRocket example in `posters/`:
+Every format is listed in `.claude/commands/new-poster.md`. Business-graphics formats, each with a ReleaseRocket example in `posters/`:
 
 - `linkedin-cover`: 1512x256 px. The Page logo overlaps the lower left on desktop; keep text right of ~440px.
 - `email-header`: 600x200 px, exports at 1200x400 for high-density screens.
