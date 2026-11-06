@@ -184,11 +184,11 @@
 
   /* Only the right band of this card clears the paper card, so its shapes
      are right-anchored to stay readable in the fan. */
-  .thumb-ember {
+  .thumb-gold {
     left: 194px;
     z-index: 2;
     transform: rotate(8deg);
-    background: #E66233;
+    background: #E6C15C;
     padding: 22px 18px;
     display: flex;
     flex-direction: column;
@@ -196,14 +196,14 @@
     justify-content: space-between;
   }
 
-  .thumb-ember .block {
-    background: #1C0D04;
+  .thumb-gold .block {
+    background: #061F35;
     border-radius: 3px;
   }
 
-  .thumb-ember .block.bar { height: 11px; width: 58px; }
-  .thumb-ember .block.slab { height: 68px; width: 78px; }
-  .thumb-ember .block.dot { height: 24px; width: 24px; border-radius: 50%; }
+  .thumb-gold .block.bar { height: 11px; width: 58px; }
+  .thumb-gold .block.slab { height: 68px; width: 78px; }
+  .thumb-gold .block.dot { height: 24px; width: 24px; border-radius: 50%; }
 
   /* Fit-to-window preview */
   @media screen {
@@ -223,14 +223,14 @@
   <div class="left">
     <h1 class="headline">Poster Maker</h1>
     <p class="tagline">AI flyer and poster generator for Claude Code</p>
-    <div class="command"><span class="prompt">$</span> /new-poster launch flyer, dark, ember accent<span class="cursor"></span></div>
+    <div class="command"><span class="prompt">$</span> /new-poster launch flyer, gold on navy<span class="cursor"></span></div>
     <div class="badge">dabo.dev</div>
   </div>
 
   <div class="right">
     <div class="fan">
       <div class="thumb thumb-dark"><span class="glyph">A</span></div>
-      <div class="thumb thumb-ember">
+      <div class="thumb thumb-gold">
         <div class="block bar"></div>
         <div class="block slab"></div>
         <div class="block dot"></div>
